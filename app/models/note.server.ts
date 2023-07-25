@@ -50,3 +50,8 @@ export function deleteNote({
     where: { id, userId },
   });
 }
+
+export function getAllNotes() {
+  return prisma.note.findMany();
+} 
+
