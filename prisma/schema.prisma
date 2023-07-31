@@ -8,19 +8,27 @@ generator client {
 }
 
 model User {
-  id    String @id @default(cuid())
-  email String @unique
+  id                 String          @id @default(cuid())
+  email              String          @unique
+  role               String          @default("user")
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  password           Password?
+  notes              Note[]
+  appointments       Appointment[]
+  estimates          Estimate[]
+  expenses           Expense[] // Expenses incurred by the user (e.g., commissions, equipment
+  inventory          InventoryItem[] // Inventory items managed by the user
+  sales              Sale[] // Sales made by the user (including discounts)
+  assignedProspects  Prospect[]      @relation("AssignedProspects")
+  installedProspects Prospect[]      @relation("InstalledProspects")
+  prospects          Prospect[]      @relation("UserProspects") // Add the relation field for prospects
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  password Password?
-  notes    Note[]
+  Installation Installation[]
 }
 
 model Password {
-  hash String
-
+  hash   String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
 }
@@ -35,4 +43,271 @@ model Note {
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
+}
+
+model Prospect {
+  id               String          @id @default(cuid())
+  firstName        String
+  lastName         String
+  phoneNumber      String          @unique
+  email            String?
+  status           String          @default("NEW")
+  callAttempts     Int             @default(0)
+  lastCallDate     DateTime?
+  callLaterDate    DateTime?
+  appointmentDate  DateTime?
+  address          String?
+  crossStreets     String?
+  houseDescription String?
+  salesChannel     String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  addressPhoto     Photo? // One-to-one relationship with Photo model
+  user             User?           @relation("UserProspects", fields: [userId], references: [id])
+  userId           String?
+  appointment      Appointment?
+  prospectLogs     ProspectLog[]
+  inventoryItems   InventoryItem[] // Inventory items sold to the prospect
+  estimates        Estimate[]
+  sales            Sale[]
+  assignedTo       User?           @relation("AssignedProspects", fields: [assignedToId], references: [id])
+  assignedToId     String?
+  installation     Installation[]
+  installedBy      User?           @relation("InstalledProspects", fields: [installedById], references: [id])
+  installedById    String?
+  LogItem          LogItem[]
+  Review           Review[]
+  Survey           Survey[]
+}
+
+// enum ProspectStatus {
+//   NO_ANSWER
+//   NOT_INTERESTED
+//   CALL_LATER
+//   SCHEDULED
+// }
+model InventoryItem {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  quantity    Int
+  unitPrice   Float
+  totalValue  Float    @default(0)
+  cost        Float    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?    @relation(fields: [userId], references: [id])
+  userId      String?
+  prospect    Prospect @relation(fields: [prospectId], references: [id])
+  prospectId  String
+}
+
+model ProspectLog {
+  id         String    @id @default(cuid())
+  prospect   Prospect  @relation(fields: [prospectId], references: [id])
+  prospectId String
+  action     String
+  logItems   LogItem[] @relation("LogItemToLog")
+  timestamp  DateTime  @default(now())
+}
+
+model LogItem {
+  id         String   @id @default(cuid())
+  prospect   Prospect @relation(fields: [prospectId], references: [id])
+  prospectId String
+  action     String
+  timestamp  DateTime @default(now())
+
+  log           ProspectLog @relation("LogItemToLog", fields: [prospectLogId], references: [id])
+  prospectLogId String
+}
+
+model Estimate {
+  id         String    @id @default(cuid())
+  room       Section[] // Each estimate has multiple sections
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  prospect   Prospect  @relation(fields: [prospectId], references: [id])
+  prospectId String
+  totalPrice Float     @default(0) // Total price for the estimate
+  user       User?     @relation(fields: [userId], references: [id])
+  userId     String?
+}
+
+model Section {
+  id            String          @id @default(cuid())
+  sectionName   String
+  windows       Window[]
+  photos        SectionPhoto[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  estimate      Estimate        @relation(fields: [estimateId], references: [id])
+  estimateId    String
+  PricingOption PricingOption[]
+}
+
+model Window {
+  id          String   @id @default(cuid())
+  width       Float
+  height      Float
+  insideFrame Boolean
+  blindType   String
+  blindColor  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  section     Section  @relation(fields: [sectionId], references: [id]) // Each window belongs to a section
+  sectionId   String
+}
+
+model SectionPhoto {
+  id        String   @id @default(cuid())
+  imageURL  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  section   Section  @relation(fields: [sectionId], references: [id])
+  sectionId String   @unique
+}
+
+model PricingOption {
+  id          String     @id @default(cuid())
+  factoryCost Float
+  clientPrice Float
+  discounts   Discount[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  section     Section    @relation(fields: [sectionId], references: [id])
+  sectionId   String
+}
+
+model Discount {
+  id              String        @id @default(cuid())
+  discountType    String
+  discountValue   Float
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  pricingOption   PricingOption @relation(fields: [pricingOptionId], references: [id])
+  pricingOptionId String
+}
+
+model Photo {
+  id         String   @id @default(cuid())
+  imageURL   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  prospect   Prospect @relation(fields: [prospectId], references: [id])
+  prospectId String   @unique
+}
+
+model Sale {
+  id           String       @id @default(cuid())
+  status       String       @default("NOT_CONFIRMED")
+  signatureURL String
+  email        String?
+  discount     Float        @default(0) // Discount in percentage (e.g., 10 for 10% discount)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  prospect     Prospect     @relation(fields: [prospectId], references: [id])
+  prospectId   String
+  user         User?        @relation(fields: [userId], references: [id])
+  userId       String?
+  Production   Production[]
+}
+
+// enum SaleStatus {
+//   CONFIRMED
+//   SCHEDULED
+//   CONFIRM_LATER
+// }
+
+model Production {
+  id        String      @id @default(cuid())
+  status    String      @default("NOT_SENT")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  sale      Sale        @relation(fields: [saleId], references: [id])
+  saleId    String
+  Inventory Inventory[]
+}
+
+// enum ProductionStatus {
+//   NOT_RECEIVED
+//   RECEIVED
+// }
+
+model Inventory {
+  id           String     @id @default(cuid())
+  notes        String?
+  condition    String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  production   Production @relation(fields: [productionId], references: [id])
+  productionId String
+}
+
+model Appointment {
+  id              String         @id @default(cuid())
+  status          String
+  appointmentDate DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  prospect        Prospect       @relation(fields: [prospectId], references: [id])
+  prospectId      String         @unique
+  user            User?          @relation(fields: [userId], references: [id])
+  userId          String?
+  Installation    Installation[]
+}
+
+// enum AppointmentStatus {
+//   CONFIRMED
+//   RESCHEDULED
+//   CANCELLED
+//   CALL_LATER
+//   NO_ANSWER
+//   NOT_INTERESTED
+// }
+
+model Installation {
+  id            String      @id @default(cuid())
+  address       String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  appointmentId String
+  installer     User?       @relation(fields: [installerId], references: [id])
+  installerId   String?
+  prospect      Prospect    @relation(fields: [prospectId], references: [id])
+  prospectId    String
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  rating     Int
+  comment    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  prospect   Prospect @relation(fields: [prospectId], references: [id])
+  prospectId String
+}
+
+model Survey {
+  id                 String   @id @default(cuid())
+  satisfactionRating Int
+  salesProcessRating Int
+  installationRating Int
+  review             String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  prospect           Prospect @relation(fields: [prospectId], references: [id])
+  prospectId         String
+}
+
+model Expense {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  amount      Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?    @relation(fields: [userId], references: [id])
+  userId      String?
 }
