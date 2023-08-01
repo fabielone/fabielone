@@ -1,20 +1,72 @@
 import { Accordion, Button, Checkbox, Label, TextInput } from "flowbite-react";
-import type { LoaderArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
+import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { Form, Link, NavLink, Outlet, useActionData, useLoaderData } from "@remix-run/react";
 
-import { getNoteListItems } from "~/models/note.server";
+import { createNote, getNoteListItems } from "~/models/note.server";
+import { createProspect ,getProspectListItems} from "~/models/prospect.server";
 import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
+import { useRef, useEffect } from "react";
+import { get } from "http";
 
 export const loader = async ({ request }: LoaderArgs) => {
   const userId = await requireUserId(request);
-  const noteListItems = await getNoteListItems({ userId });
+  const noteListItems = await getProspectListItems();
   return json({ noteListItems });
 };
+
+export const action = async ({ request }: ActionArgs) => {
+    const userId = await requireUserId(request);
+  
+    const formData = await request.formData();
+    const title = formData.get("title");
+    const body = formData.get("body");
+    const telefono = formData.get("telefono");
+  
+    if (typeof title !== "string" || title.length === 0) {
+      return json(
+        { errors: { body: null, title: "Title is required" } },
+        { status: 400 }
+      );
+    }
+  
+    if (typeof body !== "string" || body.length === 0) {
+      return json(
+        { errors: { body: "Body is required", title: null } },
+        { status: 400 }
+      );
+    }
+
+    if (typeof telefono !== "string" || body.length === 0) {
+        return json(
+          { errors: { body: "Body is required", title: null } },
+          { status: 400 }
+        );
+      }
+    
+    const prospect = await createProspect({ firstName:title,lastName:body,phoneNumber:telefono , userId:userId});
+  
+    return redirect(`/home/prospects/`);
+  };
+
 export default function HomeProspects() {
     const data = useLoaderData<typeof loader>();
     const user = useUser();
+
+    const actionData = useActionData<typeof action>();
+    const titleRef = useRef<HTMLInputElement>(null);
+    const bodyRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+    if (actionData?.errors?.title) {
+      titleRef.current?.focus();
+    } else if (actionData?.errors?.body) {
+      bodyRef.current?.focus();
+    }
+  }, [actionData]);
+
+
     return (
         <>
          <div className="p-4 sm:ml-64">
@@ -25,19 +77,37 @@ export default function HomeProspects() {
                             Agregar Prospecto
                         </Accordion.Title>
                         <Accordion.Content>
-                        <form className="flex justify-center max-w-md flex-col gap-4">
-      <div className="flex ">
+                        <Form
+                            method="post"
+                            style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 8,
+                            width: "100%",
+                            }}
+                        >
+                             <div className="flex ">
         <div className="mb-2 block">
           <Label
             htmlFor="email1"
             value="Nombre"
           />
            <TextInput
-          id="email1"
-          placeholder="name@flowbite.com"
-          required
-          type="email"
-        />
+            id="nombre"
+            placeholder=""
+            type="text"
+            ref={titleRef}
+            name="title"
+            aria-invalid={actionData?.errors?.title ? true : undefined}
+            aria-errormessage={
+            actionData?.errors?.title ? "title-error" : undefined
+           }
+            />
+            {actionData?.errors?.title ? (
+                                 <div className="pt-1 text-red-700" id="title-error">
+                                {actionData.errors.title}
+                                 </div>
+                                 ) : null}
         </div>
        
         <div className="mb-2 block mx-4">
@@ -46,14 +116,27 @@ export default function HomeProspects() {
             value="Apellido"
           />
            <TextInput
-          id="email1"
-          placeholder="name@flowbite.com"
-          required
-          type="email"
+            id="apellido"
+            placeholder=""
+            type="text"
+            ref={bodyRef}
+            name="body"
+            aria-invalid={actionData?.errors?.body ? true : undefined}
+            aria-errormessage={
+              actionData?.errors?.body ? "body-error" : undefined
+            }
          />
+         {actionData?.errors?.body ? (
+          <div className="pt-1 text-red-700" id="body-error">
+            {actionData.errors.body}
+          </div>
+        ) : null}
         </div>
        
       </div>
+                           
+
+      
       <div className="flex ">
        
         <div className="mb-2 block">
@@ -62,24 +145,23 @@ export default function HomeProspects() {
             value="Numero"
           />
            <TextInput
-          id="password1"
+          id="telefono"
           required
-          type="password"
+          type="text"
+            name="telefono"
         />
        
         </div>
         
       </div>
+
+      <div className="text-right">
       <Button type="submit">
        Agregar
       </Button>
-      <div>
-        
-       
       </div>
-   
-      
-                </form>
+    </Form>
+                        
                         </Accordion.Content>
                     </Accordion.Panel>
                 </Accordion>
@@ -96,7 +178,7 @@ export default function HomeProspects() {
                     Nombre
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Color
+                    Contactar
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Category
@@ -109,22 +191,31 @@ export default function HomeProspects() {
         </thead>
         <tbody>
         {data.noteListItems.length === 0 ? (
-            <p className="p-4">No notes yet</p>
+            <p className="p-4">No hay prospectos</p>
           ) : (
-            <ol>
-              {data.noteListItems.map((note) => (
-                <li key={note.id}>
+            <>
+              {data.noteListItems.map((note,index) => (
+                <tr className={`${
+                    index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                  } border-b dark:bg-gray-900 dark:border-gray-700`}>
+                <th key={note.id}
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
                   <NavLink
-                    className={({ isActive }) =>
-                      `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-                    }
+                    
                     to={note.id}
                   >
-                    📝 {note.title}
+                    {note.firstName} {note.lastName} 
+                    <br></br>
                   </NavLink>
-                </li>
+                </th>
+                <td className="px-6 py-4">{note.phoneNumber }</td>
+                <td className="px-6 py-4"></td>
+                <td className="px-6 py-4"></td>
+                </tr>
               ))}
-            </ol>
+              </>
+            
           )}
             <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">

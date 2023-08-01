@@ -20,7 +20,7 @@ export function getProspectListItems() {
       appointment: null, // Exclude prospects with an appointment
       installation: { every:{} }, // Exclude prospects with an installation
     },
-    select: { id: true, appointment: false },
+    //select: { id: true, appointment: false },
     orderBy: { updatedAt: 'desc' },
   });
 }

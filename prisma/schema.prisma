@@ -49,7 +49,7 @@ model Prospect {
   id               String          @id @default(cuid())
   firstName        String
   lastName         String
-  phoneNumber      String          @unique
+  phoneNumber      String          //make unique in a future 
   email            String?
   status           String          @default("NEW")
   callAttempts     Int             @default(0)
