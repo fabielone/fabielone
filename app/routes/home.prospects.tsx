@@ -1,7 +1,20 @@
 import { Accordion, Button, Checkbox, Label, TextInput } from "flowbite-react";
+import type { LoaderArgs } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 
+import { getNoteListItems } from "~/models/note.server";
+import { requireUserId } from "~/session.server";
+import { useUser } from "~/utils";
+
+export const loader = async ({ request }: LoaderArgs) => {
+  const userId = await requireUserId(request);
+  const noteListItems = await getNoteListItems({ userId });
+  return json({ noteListItems });
+};
 export default function HomeProspects() {
-
+    const data = useLoaderData<typeof loader>();
+    const user = useUser();
     return (
         <>
          <div className="p-4 sm:ml-64">
@@ -95,6 +108,24 @@ export default function HomeProspects() {
             </tr>
         </thead>
         <tbody>
+        {data.noteListItems.length === 0 ? (
+            <p className="p-4">No notes yet</p>
+          ) : (
+            <ol>
+              {data.noteListItems.map((note) => (
+                <li key={note.id}>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
+                    }
+                    to={note.id}
+                  >
+                    📝 {note.title}
+                  </NavLink>
+                </li>
+              ))}
+            </ol>
+          )}
             <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                    Fabiel Ramirez 
