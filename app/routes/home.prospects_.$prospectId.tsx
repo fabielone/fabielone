@@ -1,10 +1,15 @@
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { Label, TextInput, Button, Select, Textarea } from "flowbite-react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import InnerOutline from "~/components/inneroutline";
 import { useUser } from "~/utils";
 import { loader } from "./healthcheck";
 import { action } from "./home.prospects";
+import DatePicker from "react-datepicker";
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 
 
@@ -18,6 +23,10 @@ export default function HomeProspectsProspectId() {
         const actionData = useActionData<typeof action>();
         const titleRef = useRef<HTMLInputElement>(null);
         const bodyRef = useRef<HTMLInputElement>(null);
+
+        const [startDate, setStartDate] = useState<Date | null>(
+                setHours(setMinutes(new Date(), 30), 16)
+              );
     
         useEffect(() => {
         if (actionData?.errors?.title) {
@@ -240,6 +249,21 @@ export default function HomeProspectsProspectId() {
      
 
       {/* fecha de presupuesto */}
+
+      <DatePicker
+      selected={startDate}
+      onChange={(date) => setStartDate(date)}
+      showTimeSelect
+      excludeTimes={[
+        setHours(setMinutes(new Date(), 0), 17),
+        setHours(setMinutes(new Date(), 30), 18),
+        setHours(setMinutes(new Date(), 30), 19),
+        setHours(setMinutes(new Date(), 30), 17),
+      ]}
+      dateFormat="MMMM d, yyyy h:mm aa"
+    />
+      
+
       <div className="flex space-x-4">
        
      
