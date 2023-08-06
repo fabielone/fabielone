@@ -133,39 +133,45 @@ export default function HomeProspectsProspectId() {
         </div>
         <div className=" flex mb-2 space-x-4 self-end">
         <Button type="submit">
-       LLamar
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0l-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 014.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 00-.38 1.21 12.035 12.035 0 007.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 011.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 01-2.25 2.25h-2.25z" />
+</svg>
+
       </Button>
       <Button type="submit" className="bg-lime-500" >
-       whatsapp
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+</svg>
+
       </Button>
       </div>
       </div>
       <p>ultima llamada: </p>
-      <p># de llamadas</p>
+      <p># de llamadas:</p>
       {/* agendar llamada despues  */}
       <div className="flex space-x-4">
        
       
-       <div className=" mb-2 block">
+       <div className=" mb-2 flex flex-col">
        <Label
-           htmlFor="telefono"
-           value="agendar llamada despues"
+           htmlFor="agendarllamada"
+           value="agendar llamada:"
          />
-          <TextInput
-               id="telefono"
-               required
-               type="text"
-               name="telefono"
-           />
+         <DatePicker
+         name="agendarllamada"
+      selected={startDate}
+      onChange={(date) => setStartDate(date)}
+      showTimeSelect
+      excludeTimes={[
+        setHours(setMinutes(new Date(), 0), 17),
+        setHours(setMinutes(new Date(), 30), 18),
+        setHours(setMinutes(new Date(), 30), 19),
+        setHours(setMinutes(new Date(), 30), 17),
+      ]}
+      dateFormat="MMMM d, yyyy h:mm aa"
+    />
        </div>
-       <div className=" flex mb-2 space-x-4 self-end">
-       <Button type="submit">
-      LLamar
-     </Button>
-     <Button type="submit" className="bg-lime-500" >
-      whatsapp
-     </Button>
-     </div>
+     
      </div>
       {/* estado */}
       <div
@@ -175,7 +181,7 @@ export default function HomeProspectsProspectId() {
       <div className="mb-2 block">
         <Label
           htmlFor="countries"
-          value="Select your country"
+          value="Estado"
         />
       </div>
       <Select
@@ -214,10 +220,16 @@ export default function HomeProspectsProspectId() {
         </div>
         <div className=" flex mb-2 space-x-4 self-end">
         <Button type="submit">
-       buscar
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+</svg>
+
       </Button>
       <Button type="submit" className="bg-lime-500" >
-       google maps
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+</svg>
+
       </Button>
       </div>
       </div>
@@ -250,7 +262,17 @@ export default function HomeProspectsProspectId() {
 
       {/* fecha de presupuesto */}
 
-      <DatePicker
+     
+
+      <div className="flex space-x-4">
+       
+     
+       <div className=" mb-2 flex flex-col">
+       <Label
+           htmlFor="telefono"
+           value="fecha de presupuesto:"
+         />
+           <DatePicker
       selected={startDate}
       onChange={(date) => setStartDate(date)}
       showTimeSelect
@@ -263,21 +285,6 @@ export default function HomeProspectsProspectId() {
       dateFormat="MMMM d, yyyy h:mm aa"
     />
       
-
-      <div className="flex space-x-4">
-       
-     
-       <div className=" mb-2 block">
-       <Label
-           htmlFor="telefono"
-           value="fecha de presupuesto"
-         />
-          <TextInput
-               id="telefono"
-               required
-               type="text"
-               name="telefono"
-           />
        </div>
       
      </div>
