@@ -8,7 +8,7 @@ export function getProspect({
 }: Pick<Prospect, "id"> 
 ) {
   return prisma.prospect.findFirst({
-    select: { id: true,},
+   
     where: { id },
   });
 }
@@ -16,11 +16,23 @@ export function getProspect({
 export function getProspectListItems() {
   return prisma.prospect.findMany({
     where: {
-      status: { not: 'not_interested' }, // Exclude prospects with status "not_interested"
-      appointment: null, // Exclude prospects with an appointment
-      installation: { every:{} }, // Exclude prospects with an installation
+
+      OR: [
+        { status: "nuevo" },
+        { status: "llamada_agendada" },
+      ],
+     // status: "nuevo"|| "llamada_agendada", // Exclude prospects with status "not_interested"
+    // appointment: null, // Exclude prospects with an appointment
+     // installation: { every:{} }, // Exclude prospects with an installation
     },
     //select: { id: true, appointment: false },
+    orderBy: { updatedAt: 'desc' },
+  });
+}
+
+// get all prospects 
+export function getAllProspects() {
+  return prisma.prospect.findMany({
     orderBy: { updatedAt: 'desc' },
   });
 }
@@ -31,13 +43,15 @@ export function createProspect({
   lastName,
   phoneNumber,
   userId,
-}: Pick<Prospect, "firstName" | "lastName" |  "phoneNumber" > & {
+  lada,
+}: Pick<Prospect, "firstName" | "lastName" |  "phoneNumber" | "lada"> & {
   userId: User["id"];
 }) {
   return prisma.prospect.create({
     data: {
       firstName,
       lastName,
+      lada,
       phoneNumber,
       
       user: {
@@ -55,4 +69,65 @@ export function createProspect({
 // get all prospects that belong to a user
 
 // update prospect 
+
+export function updateProspect({
+  id,
+  firstName,
+  lastName,
+  lada,
+  phoneNumber,
+  status,
+  callLaterDate,
+  appointmentDate,
+  address,
+  indicaciones,
+  notas_p,
+}: Pick<Prospect, "id" | "firstName" | "lastName" | "lada" | "phoneNumber" | "status" | "callLaterDate" | "appointmentDate" | "address" | "indicaciones" | "notas_p"> 
+) {
+  return prisma.prospect.update({
+    where: { id },
+    data: {
+      firstName,
+      lastName,
+      lada,
+      phoneNumber,
+      status,
+      callLaterDate,
+      appointmentDate,
+      address,
+      indicaciones,
+      notas_p,
+    },
+  });
+}
+
+// get number of prospects that are nuevo or llamada_agendada
+export function getProspectCount() {
+  return prisma.prospect.count({
+    where: {
+      OR: [
+        { status: "nuevo" },
+        { status: "llamada_agendada" },
+      ],
+    },
+  });
+}
+
+//increment prospect call attemps and last call date
+export function incrementProspectCallCount({
+  id,
+}: Pick<Prospect, "id"> 
+) {
+  return prisma.prospect.update({
+    where: { id },
+    data: {
+      callAttempts: { increment: 1 },
+      lastCallDate: new Date(),
+    },
+  });
+}
+
+
+
+
 

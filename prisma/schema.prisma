@@ -49,6 +49,7 @@ model Prospect {
   id               String          @id @default(cuid())
   firstName        String
   lastName         String
+  lada             String?         @default("+52")
   phoneNumber      String          //make unique in a future 
   email            String?
   status           String          @default("nuevo")
