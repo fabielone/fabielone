@@ -1,5 +1,4 @@
 import { Outlet } from "@remix-run/react";
-import Footer from "~/components/FooterComp";
 import FooterNav from "~/components/FooterNav";
 import NavBar from "~/components/NavBar";
 import type { V2_MetaFunction } from "@remix-run/node";

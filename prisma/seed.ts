@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import{ PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function seed() {
   const email = "mia@blindsbaja.com";
   const email2 = "fabiel@blindsbaja.com";
-  const email3 = "frida@blindsbaja.com";
+
 
   // cleanup the existing database
   await prisma.user.delete({ where: { email } }).catch(() => {
@@ -41,20 +41,7 @@ async function seed() {
     },
   });
 
-  const user3 = await prisma.user.create({
-     
-    data: {
-      email:email3,
-      role:"admin",
-      password: {
-        create: {
-          hash: hashedPassword,
-        },
-      },
-    },
-  });
-
-
+ 
   await prisma.note.create({
     data: {
       title: "My first note",
@@ -116,96 +103,7 @@ async function seed() {
     },
   });
 
-  // Create estimates
-  const estimate1 = await prisma.estimate.create({
-    data: {
-      totalPrice: 1000,
-      userId: user.id,
-      prospectId: prospect1.id,
-    },
-  });
-
-  const estimate2 = await prisma.estimate.create({
-    data: {
-      totalPrice: 800,
-      userId: user2.id,
-      prospectId: prospect2.id,
-    },
-  });
-
-  // Create sections
-  const livingroom =await prisma.section.create({
-    data: {
-      sectionName: "Living Room",
-      estimateId: estimate1.id,
-    },
-  });
-
-  const bedroom = await prisma.section.create({
-    data: {
-      sectionName: "Bedroom",
-      estimateId: estimate1.id,
-    },
-  });
-
-  const kitchen =  await prisma.section.create({
-    data: {
-      sectionName: "Kitchen",
-      estimateId: estimate2.id,
-    },
-  });
-
-  const bathroom = await prisma.section.create({
-    data: {
-      sectionName: "Bathroom",
-      estimateId: estimate2.id,
-    },
-  });
-
-  // Create windows
-  const window1 = await prisma.window.create({
-    data: {
-      width: 60,
-      height: 40,
-      insideFrame: true,
-      blindType: "Roller Blind",
-      blindColor: "White",
-      sectionId: livingroom.id,
-    },
-  });
-
-  const window2 = await prisma.window.create({
-    data: {
-      width: 50,
-      height: 30,
-      insideFrame: false,
-      blindType: "Venetian Blind",
-      blindColor: "Silver",
-      sectionId: kitchen.id,
-    },
-  });
-
-  const window3 = await prisma.window.create({
-    data: {
-      width: 40,
-      height: 30,
-      insideFrame: true,
-      blindType: "Roman Blind",
-      blindColor: "Blue",
-      sectionId: bedroom.id,
-    },
-  });
-
-  const window4 = await prisma.window.create({
-    data: {
-      width: 70,
-      height: 50,
-      insideFrame: false,
-      blindType: "Vertical Blind",
-      blindColor: "Beige",
-      sectionId: bedroom.id,
-    },
-  });
+ 
 
   // Create photos
   await prisma.photo.create({

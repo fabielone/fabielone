@@ -1,13 +1,8 @@
 // components/PicComp.tsx
-import React from 'react';
 import {
   Box,
-  Text,
-  VStack,
   Image,
   useBreakpointValue,
-  Grid,
-  SimpleGrid,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import ProfilePic from './../../public/assets/profile.jpg'
@@ -21,11 +16,7 @@ const PicComp = () => {
     sm: '150px',
     md: '200px',
   });
-  const titleFontSize = useBreakpointValue({
-    base: 'lg',
-    sm: 'xl',
-    md: '2xl',
-  });
+
 
   return (
     <MotionBox

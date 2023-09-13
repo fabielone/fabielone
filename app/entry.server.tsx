@@ -10,10 +10,10 @@ import type { EntryContext } from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
-import { renderToPipeableStream } from "react-dom/server";
+import { renderToPipeableStream,renderToString } from "react-dom/server";
 
 // entry.server.tsx
-import { renderToString } from 'react-dom/server'
+
 import { CacheProvider } from '@emotion/react'
 import createEmotionServer from '@emotion/server/create-instance'
 
@@ -106,13 +106,7 @@ function handleBrowserRequest(
 
   const chunks = extractCriticalToChunks(html)
 
-  const markup = renderToString(
-    <ServerStyleContext.Provider value={chunks.styles}>
-      <CacheProvider value={cache}>
-        <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />
-      </CacheProvider>
-    </ServerStyleContext.Provider>,
-  )
+  
   return new Promise((resolve, reject) => {
     const { pipe, abort } = renderToPipeableStream(
       <ServerStyleContext.Provider value={chunks.styles}>

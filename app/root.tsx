@@ -16,14 +16,11 @@ import stylesheet from "~/tailwind.css";
 // root.tsx
 import React, { useContext, useEffect } from 'react'
 import { withEmotionCache } from '@emotion/react'
-import { Box, ChakraProvider, Grid, GridItem } from '@chakra-ui/react'
-import { MetaFunction,  } from '@remix-run/node' // Depends on the runtime you choose
+import { Box, ChakraProvider, } from '@chakra-ui/react'
+
 
 import { ServerStyleContext, ClientStyleContext } from './context'
-import Footer from "./components/FooterComp";
-import ContComp from "./components/ContComp";
-import HeaderComp from "./components/HeaderComp";
-import PicComp from "./components/PicComp";
+
 
 export const meta: V2_MetaFunction = () => ([
   {

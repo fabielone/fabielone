@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Box,
   Text,
-  VStack,
   Image,
   Button,
   Modal,
@@ -12,7 +11,6 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  HStack,
   Stack,
 } from '@chakra-ui/react';
 
@@ -23,28 +21,6 @@ interface Project {
   imageUrl: string;
   description: string;
 }
-
-const projects = [
-  {
-    title: 'Project 1',
-    techStack: 'React, Node.js',
-    imageUrl: 'project1.jpg',
-    description: 'Description for Project 1...',
-  },
-  {
-    title: 'Project 2',
-    techStack: 'Vue.js, Express',
-    imageUrl: 'project2.jpg',
-    description: 'Description for Project 2...',
-  },
-  {
-    title: 'Project 3',
-    techStack: 'Angular, Firebase',
-    imageUrl: 'project3.jpg',
-    description: 'Description for Project 3...',
-  },
-  // Add more project objects as needed
-];
 
 
 const PortfolioItem: React.FC<{ project: Project }> = ({ project }) => {

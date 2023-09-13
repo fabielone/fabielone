@@ -1,6 +1,6 @@
 // components/HeaderComp.tsx
 import React from 'react';
-import { Box, Text, VStack, HStack, Stack } from '@chakra-ui/react';
+import { Box, Text, VStack, Stack } from '@chakra-ui/react';
 import { Link } from '@remix-run/react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin } from "react-icons/fa"; // Import the GitHub and LinkedIn icons

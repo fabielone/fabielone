@@ -1,7 +1,6 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import Footer from "~/components/FooterComp"
 import ContComp from "~/components/ContComp";
-import DescComp from "~/components/DescComp";
 import HeaderComp from "~/components/HeaderComp";
 import PicComp from "~/components/PicComp";
 import { Outlet } from "@remix-run/react";
