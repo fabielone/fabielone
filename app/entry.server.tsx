@@ -10,16 +10,15 @@ import type { EntryContext } from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
-import { renderToPipeableStream,renderToString } from "react-dom/server";
+import { renderToPipeableStream, renderToString } from "react-dom/server";
 
 // entry.server.tsx
 
-import { CacheProvider } from '@emotion/react'
-import createEmotionServer from '@emotion/server/create-instance'
+import { CacheProvider } from "@emotion/react";
+import createEmotionServer from "@emotion/server/create-instance";
 
-
-import { ServerStyleContext } from './context'
-import createEmotionCache from './createEmotionCache'
+import { ServerStyleContext } from "./context";
+import createEmotionCache from "./createEmotionCache";
 
 const ABORT_DELAY = 5_000;
 
@@ -92,28 +91,30 @@ function handleBrowserRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-
-  const cache = createEmotionCache()
-  const { extractCriticalToChunks } = createEmotionServer(cache)
+  const cache = createEmotionCache();
+  const { extractCriticalToChunks } = createEmotionServer(cache);
 
   const html = renderToString(
     <ServerStyleContext.Provider value={null}>
       <CacheProvider value={cache}>
         <RemixServer context={remixContext} url={request.url} />
       </CacheProvider>
-    </ServerStyleContext.Provider>,
-  )
+    </ServerStyleContext.Provider>
+  );
 
-  const chunks = extractCriticalToChunks(html)
+  const chunks = extractCriticalToChunks(html);
 
-  
   return new Promise((resolve, reject) => {
     const { pipe, abort } = renderToPipeableStream(
       <ServerStyleContext.Provider value={chunks.styles}>
-      <CacheProvider value={cache}>
-        <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />
-      </CacheProvider>
-    </ServerStyleContext.Provider>,
+        <CacheProvider value={cache}>
+          <RemixServer
+            context={remixContext}
+            url={request.url}
+            abortDelay={ABORT_DELAY}
+          />
+        </CacheProvider>
+      </ServerStyleContext.Provider>,
       {
         onShellReady() {
           const body = new PassThrough();
@@ -142,8 +143,3 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
-
-
-
-
-

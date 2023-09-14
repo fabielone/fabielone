@@ -1,12 +1,12 @@
-import React from 'react';
-import { Box } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { Box } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 interface MainPageProps {
   children: React.ReactNode;
 }
 
-const MainPage =  (props: MainPageProps ) => {
+const MainPage = (props: MainPageProps) => {
   return (
     <Box
       backgroundColor="gray.200"

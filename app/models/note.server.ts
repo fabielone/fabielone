@@ -53,5 +53,4 @@ export function deleteNote({
 
 export function getAllNotes() {
   return prisma.note.findMany();
-} 
-
+}

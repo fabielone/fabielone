@@ -1,15 +1,15 @@
 // components/HeaderComp.tsx
-import React from 'react';
-import { Box, Text, VStack, Stack } from '@chakra-ui/react';
-import { Link } from '@remix-run/react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { Box, Text, VStack, Stack } from "@chakra-ui/react";
+import { Link } from "@remix-run/react";
+import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa"; // Import the GitHub and LinkedIn icons
 
 const MotionBox = motion(Box);
 
 const HeaderComp = () => {
   const variants = {
-    hidden: { x: '100%' },
+    hidden: { x: "100%" },
     visible: { x: 0, transition: { duration: 0.5 } },
   };
 
@@ -33,19 +33,30 @@ const HeaderComp = () => {
         </Text>
       </VStack>
       <Stack direction="row" spacing={4} align="center" justify="center">
-      <Link to={"https://github.com/fabielone"} target="_blank" rel="noopener noreferrer">
-            <FaGithub size={24} />
-          </Link>
-          <Link to={"https://linkedin.com/in/fabielone"} target="_blank" rel="noopener noreferrer">
-            <FaLinkedin size={24} />
-          </Link>
+        <Link
+          to={"https://github.com/fabielone"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaGithub size={24} />
+        </Link>
+        <Link
+          to={"https://linkedin.com/in/fabielone"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaLinkedin size={24} />
+        </Link>
       </Stack>
-    <Stack direction={'row'} align="center" justify="center" spacing={4}
-    marginBottom="16px">
-      
+      <Stack
+        direction={"row"}
+        align="center"
+        justify="center"
+        spacing={4}
+        marginBottom="16px"
+      >
         <NavButton to="/in/">About</NavButton>
         <NavButton to="/in/portfolio">Portfolio</NavButton>
-     
 
         {/* Add more navigation links as needed */}
       </Stack>
@@ -60,7 +71,7 @@ interface NavButtonProps {
 
 const NavButton = ({ to, children }: NavButtonProps) => {
   return (
-    <Link  to={to} color="blue.500">
+    <Link to={to} color="blue.500">
       {children}
     </Link>
   );

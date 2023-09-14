@@ -2,13 +2,9 @@ import type { User, Prospect } from "@prisma/client";
 
 import { prisma } from "~/db.server";
 
-// get prospect by id 
-export function getProspect({
-  id,
-}: Pick<Prospect, "id"> 
-) {
+// get prospect by id
+export function getProspect({ id }: Pick<Prospect, "id">) {
   return prisma.prospect.findFirst({
-   
     where: { id },
   });
 }
@@ -16,35 +12,31 @@ export function getProspect({
 export function getProspectListItems() {
   return prisma.prospect.findMany({
     where: {
-
-      OR: [
-        { status: "nuevo" },
-        { status: "llamada_agendada" },
-      ],
-     // status: "nuevo"|| "llamada_agendada", // Exclude prospects with status "not_interested"
-    // appointment: null, // Exclude prospects with an appointment
-     // installation: { every:{} }, // Exclude prospects with an installation
+      OR: [{ status: "nuevo" }, { status: "llamada_agendada" }],
+      // status: "nuevo"|| "llamada_agendada", // Exclude prospects with status "not_interested"
+      // appointment: null, // Exclude prospects with an appointment
+      // installation: { every:{} }, // Exclude prospects with an installation
     },
     //select: { id: true, appointment: false },
-    orderBy: { updatedAt: 'desc' },
+    orderBy: { updatedAt: "desc" },
   });
 }
 
-// get all prospects 
+// get all prospects
 export function getAllProspects() {
   return prisma.prospect.findMany({
-    orderBy: { updatedAt: 'desc' },
+    orderBy: { updatedAt: "desc" },
   });
 }
 
-// create prospect 
+// create prospect
 export function createProspect({
   firstName,
   lastName,
   phoneNumber,
   userId,
   lada,
-}: Pick<Prospect, "firstName" | "lastName" |  "phoneNumber" | "lada"> & {
+}: Pick<Prospect, "firstName" | "lastName" | "phoneNumber" | "lada"> & {
   userId: User["id"];
 }) {
   return prisma.prospect.create({
@@ -53,7 +45,7 @@ export function createProspect({
       lastName,
       lada,
       phoneNumber,
-      
+
       user: {
         connect: {
           id: userId,
@@ -63,12 +55,11 @@ export function createProspect({
   });
 }
 
-
 // delete prospect
 
 // get all prospects that belong to a user
 
-// update prospect 
+// update prospect
 
 export function updateProspect({
   id,
@@ -82,8 +73,20 @@ export function updateProspect({
   address,
   indicaciones,
   notas_p,
-}: Pick<Prospect, "id" | "firstName" | "lastName" | "lada" | "phoneNumber" | "status" | "callLaterDate" | "appointmentDate" | "address" | "indicaciones" | "notas_p"> 
-) {
+}: Pick<
+  Prospect,
+  | "id"
+  | "firstName"
+  | "lastName"
+  | "lada"
+  | "phoneNumber"
+  | "status"
+  | "callLaterDate"
+  | "appointmentDate"
+  | "address"
+  | "indicaciones"
+  | "notas_p"
+>) {
   return prisma.prospect.update({
     where: { id },
     data: {
@@ -105,19 +108,13 @@ export function updateProspect({
 export function getProspectCount() {
   return prisma.prospect.count({
     where: {
-      OR: [
-        { status: "nuevo" },
-        { status: "llamada_agendada" },
-      ],
+      OR: [{ status: "nuevo" }, { status: "llamada_agendada" }],
     },
   });
 }
 
 //increment prospect call attemps and last call date
-export function incrementProspectCallCount({
-  id,
-}: Pick<Prospect, "id"> 
-) {
+export function incrementProspectCallCount({ id }: Pick<Prospect, "id">) {
   return prisma.prospect.update({
     where: { id },
     data: {
@@ -126,8 +123,3 @@ export function incrementProspectCallCount({
     },
   });
 }
-
-
-
-
-

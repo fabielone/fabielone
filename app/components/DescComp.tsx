@@ -1,12 +1,12 @@
-import React from 'react';
-import { Box, Text, VStack } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { Box, Text, VStack } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 const MotionBox = motion(Box);
 
 const DescComp: React.FC = () => {
   const variants = {
-    hidden: { opacity: 0, y: '100%' },
+    hidden: { opacity: 0, y: "100%" },
     visible: { opacity: 1, y: 0 },
   };
 
@@ -28,14 +28,7 @@ const DescComp: React.FC = () => {
           I specialize in a variety of technologies, including:
         </Text>
         <Text fontSize="md">
-          - React
-          - Node.js
-          - TypeScript
-          - ASP.NET
-          - C#
-          - C++
-          - Python
-          - Java
+          - React - Node.js - TypeScript - ASP.NET - C# - C++ - Python - Java
         </Text>
         <Text fontSize="md">
           I'm passionate about creating web applications that are user-friendly

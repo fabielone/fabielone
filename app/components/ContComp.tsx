@@ -1,5 +1,5 @@
 // components/ContactForm.tsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   FormControl,
@@ -9,19 +9,21 @@ import {
   VStack,
   Button,
   Container, // Import Container from Chakra UI
-} from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+} from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 const MotionBox = motion(Box);
 
 const ContComp = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -36,13 +38,14 @@ const ContComp = () => {
   };
 
   return (
-    <Container maxWidth="lg"> {/* Use Chakra UI's Container component to control width */}
+    <Container maxWidth="lg">
+      {" "}
+      {/* Use Chakra UI's Container component to control width */}
       <MotionBox
-        initial={{ translateY: '100%', opacity: 0 }}
-        animate={{ translateY: '0%', opacity: 1 }}
+        initial={{ translateY: "100%", opacity: 0 }}
+        animate={{ translateY: "0%", opacity: 1 }}
         transition={{ duration: 0.5 }}
         p={4}
-       
       >
         <form onSubmit={handleSubmit}>
           <VStack spacing={2}>

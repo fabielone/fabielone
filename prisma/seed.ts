@@ -1,4 +1,4 @@
-import{ PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 async function seed() {
   const email = "mia@blindsbaja.com";
   const email2 = "fabiel@blindsbaja.com";
-
 
   // cleanup the existing database
   await prisma.user.delete({ where: { email } }).catch(() => {
@@ -18,8 +17,8 @@ async function seed() {
 
   const user = await prisma.user.create({
     data: {
-      email:email,
-      role:"admin",
+      email: email,
+      role: "admin",
       password: {
         create: {
           hash: hashedPassword,
@@ -29,10 +28,9 @@ async function seed() {
   });
 
   const user2 = await prisma.user.create({
-     
     data: {
-      email:email2,
-      role:"admin",
+      email: email2,
+      role: "admin",
       password: {
         create: {
           hash: hashedPassword2,
@@ -41,7 +39,6 @@ async function seed() {
     },
   });
 
- 
   await prisma.note.create({
     data: {
       title: "My first note",
@@ -103,8 +100,6 @@ async function seed() {
     },
   });
 
- 
-
   // Create photos
   await prisma.photo.create({
     data: {
@@ -128,7 +123,7 @@ async function seed() {
       email: "john@example.com",
       discount: 10,
       userId: user.id,
-      prospectId: prospect1.id  ,
+      prospectId: prospect1.id,
     },
   });
 
@@ -159,12 +154,12 @@ async function seed() {
   });
 
   // Create appointments
-  const appointment1 =  await prisma.appointment.create({
+  const appointment1 = await prisma.appointment.create({
     data: {
       status: "CONFIRMED",
       appointmentDate: "2023-07-30T10:00:00Z",
       prospectId: prospect1.id,
-      userId: user.id,  
+      userId: user.id,
     },
   });
 
@@ -173,7 +168,7 @@ async function seed() {
       status: "RESCHEDULED",
       appointmentDate: "2023-07-31T14:00:00Z",
       prospectId: prospect2.id,
-      userId: user2.id, 
+      userId: user2.id,
     },
   });
 
@@ -184,7 +179,6 @@ async function seed() {
       appointmentId: appointment1.id,
       installerId: user.id,
       prospectId: prospect1.id,
-      
     },
   });
 
@@ -192,7 +186,7 @@ async function seed() {
     data: {
       address: "456 Oak Ave",
       appointmentId: appointment2.id,
-      installerId: user2.id,  
+      installerId: user2.id,
       prospectId: prospect2.id,
     },
   });
@@ -221,7 +215,7 @@ async function seed() {
       salesProcessRating: 5,
       installationRating: 4,
       review: "Very satisfied!",
-      prospectId: prospect1.id  ,
+      prospectId: prospect1.id,
     },
   });
 

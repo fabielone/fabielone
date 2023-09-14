@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Text,
@@ -12,7 +12,7 @@ import {
   ModalBody,
   ModalFooter,
   Stack,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 // Define a type or interface for your project data
 interface Project {
@@ -22,7 +22,6 @@ interface Project {
   description: string;
 }
 
-
 const PortfolioItem: React.FC<{ project: Project }> = ({ project }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,7 +30,13 @@ const PortfolioItem: React.FC<{ project: Project }> = ({ project }) => {
   };
 
   return (
-    <Box p={4} boxShadow="md" rounded="md" borderWidth="1px" borderColor="gray.300">
+    <Box
+      p={4}
+      boxShadow="md"
+      rounded="md"
+      borderWidth="1px"
+      borderColor="gray.300"
+    >
       <Image src={project.imageUrl} alt={project.title} rounded="md" />
       <Text fontSize="lg" fontWeight="bold" mt={2}>
         {project.title}
@@ -79,13 +84,15 @@ const Portfolio: React.FC<{ projects: Project[] }> = ({ projects }) => {
   };
 
   return (
-    <Stack spacing={4} direction={['column','column','column','row']}>
-      {projects.slice(0, showAll ? projects.length : 3).map((project, index) => (
-        <PortfolioItem key={index} project={project} />
-      ))}
+    <Stack spacing={4} direction={["column", "column", "column", "row"]}>
+      {projects
+        .slice(0, showAll ? projects.length : 3)
+        .map((project, index) => (
+          <PortfolioItem key={index} project={project} />
+        ))}
       {projects.length > 3 && (
         <Button onClick={toggleShowAll} colorScheme="blue">
-          {showAll ? 'Show Less' : 'Show More'}
+          {showAll ? "Show Less" : "Show More"}
         </Button>
       )}
     </Stack>
