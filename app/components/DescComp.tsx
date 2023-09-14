@@ -17,23 +17,22 @@ const DescComp: React.FC = () => {
       variants={variants}
       position="relative"
       p={4}
-      bg="white"
-      boxShadow="lg"
+     
     >
       <VStack spacing={4}>
         <Text fontSize="lg">
-          Hello! 👋 I'm [Your Name], a friendly full-stack developer.
-        </Text>
-        <Text fontSize="md">
-          I specialize in a variety of technologies, including:
-        </Text>
-        <Text fontSize="md">
-          - React - Node.js - TypeScript - ASP.NET - C# - C++ - Python - Java
+          Hello! 👋 I'm Fabiel Ramirez, a full-stack developer.
         </Text>
         <Text fontSize="md">
           I'm passionate about creating web applications that are user-friendly
           and efficient. My goal is to make technology accessible and enjoyable
           for everyone.
+        </Text>
+        <Text fontSize="md">
+          I specialize in a variety of technologies, including:
+        </Text>
+        <Text fontSize="md">
+          - React - Node.js - TypeScript - ASP.NET - C# -
         </Text>
         <Text fontSize="md">
           When I'm not coding, you can find me exploring the beautiful city of

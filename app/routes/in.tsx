@@ -29,9 +29,9 @@ export default function In() {
     "footer footer"`,
       ]}
       gridTemplateRows={[
-        "35vh 40vh 15vh",
-        "35vh 40vh 15vh",
-        "35vh 40vh 15vh",
+        "35vh fit-content 40vh 15vh",
+        "35vh fit-content 40vh 15vh",
+        "35vh fit-content 40vh 15vh",
         "35vh 40vh 18vh",
       ]}
       gridTemplateColumns={[
@@ -40,8 +40,9 @@ export default function In() {
         "30vw 65vw",
         "30vw 65vw",
       ]}
-      h="94vh" // Use viewport height to ensure the layout fits the screen
-      w="96%"
+     // h={["132vh","132vh","132vh","94vh"]} // Use viewport height to ensure the layout fits the screen
+     h={'fit-content'} 
+     w="96%"
       color="blackAlpha.700"
       fontWeight="bold"
       mx={["2%"]} // Adjust margin as needed

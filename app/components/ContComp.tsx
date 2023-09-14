@@ -8,7 +8,8 @@ import {
   Textarea,
   VStack,
   Button,
-  Container, // Import Container from Chakra UI
+  Container,
+  Text
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
@@ -50,12 +51,16 @@ const ContComp = () => {
         <form onSubmit={handleSubmit}>
           <VStack spacing={2}>
             <FormControl isRequired>
+              <Text size="lg">Lets Collaborate!</Text>
+              <Text size="lg"> Send me a message</Text>
               <FormLabel>Name</FormLabel>
               <Input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                border={"1px solid gray"}
+                size={["xs","xs","xs","sm"]}
               />
             </FormControl>
             <FormControl isRequired>
@@ -65,6 +70,8 @@ const ContComp = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                border={"1px solid gray"}
+                size={["xs","xs","xs","sm"]}
               />
             </FormControl>
             <FormControl isRequired>
@@ -73,9 +80,11 @@ const ContComp = () => {
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
+                border={"1px solid gray"}
+                size={["xs","xs","xs","sm"]}
               />
             </FormControl>
-            <Button type="submit" colorScheme="blue">
+            <Button type="submit" bg={"#FF5722"} color={"white"}>
               Send Message
             </Button>
           </VStack>
