@@ -12,7 +12,10 @@ import {
   ModalBody,
   ModalFooter,
   Stack,
+  SimpleGrid,
 } from "@chakra-ui/react";
+import { Link } from "@remix-run/react";
+
 
 // Define a type or interface for your project data
 interface Project {
@@ -20,6 +23,7 @@ interface Project {
   techStack: string;
   imageUrl: string;
   description: string;
+  githubUrl: string;
 }
 
 const PortfolioItem: React.FC<{ project: Project }> = ({ project }) => {
@@ -35,19 +39,31 @@ const PortfolioItem: React.FC<{ project: Project }> = ({ project }) => {
       boxShadow="md"
       rounded="md"
       borderWidth="1px"
-      borderColor="gray.300"
+      borderColor="gray.500"
+      width={'90%'}
+      placeItems={'center'}
     >
-      <Image src={project.imageUrl} alt={project.title} rounded="md" />
+      <SimpleGrid columns={[2,2,2,1]} spacing={2}>
+      <Box max-width={"fit-content"}>
+      <Image src={project.imageUrl} alt={project.title} rounded="md" height={['100']} />
       <Text fontSize="lg" fontWeight="bold" mt={2}>
         {project.title}
       </Text>
+      </Box>
+      <Box>
       <Text fontSize="md" color="gray.500">
         Tech Stack: {project.techStack}
       </Text>
+      <Text fontSize="md" mt={2}>
+        GitHub: <Link to={project.githubUrl} >{project.githubUrl}</Link>
+      </Text>
       <Button onClick={toggleModal} colorScheme="blue" mt={2}>
-        Read More
+        View
       </Button>
+      </Box>
+      </SimpleGrid>
 
+      
       {/* Modal for detailed project description */}
       <Modal isOpen={isOpen} onClose={toggleModal} size="lg">
         <ModalOverlay />
@@ -72,6 +88,7 @@ const PortfolioItem: React.FC<{ project: Project }> = ({ project }) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      
     </Box>
   );
 };
@@ -84,7 +101,7 @@ const Portfolio: React.FC<{ projects: Project[] }> = ({ projects }) => {
   };
 
   return (
-    <Stack spacing={4} direction={["column", "column", "column", "row"]}>
+    <Stack spacing={4} direction={["column", "column", "column", "row"]} alignItems={"center"}>
       {projects
         .slice(0, showAll ? projects.length : 3)
         .map((project, index) => (
