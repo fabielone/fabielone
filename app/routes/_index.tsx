@@ -2,6 +2,7 @@ import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 //import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
+
 import { useOptionalUser } from "~/utils";
 
 import { getPosts, PostMeta } from "../.server/posts"; // Import getPosts function and PostMeta type
@@ -26,12 +27,12 @@ export default function Index() {
   return (
     <>
     
- 
+   
     
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold">Posts</h1>
       <ul className="mt-4 space-y-4">
-        {data.map((post) => (
+        {data.map((post:PostMeta) => (
           <li key={post.slug}>
             <Link to={`/posts/${post.slug}`} className="text-blue-500 hover:underline">
               {post.frontmatter.title}
