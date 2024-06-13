@@ -74,3 +74,20 @@ export function useUser(): User {
 export function validateEmail(email: unknown): email is string {
   return typeof email === "string" && email.length > 3 && email.includes("@");
 }
+//sorty function
+export function sortBy<T, K>(
+  arr: T[],
+  keyFn: (item: T) => K,
+  order: 'asc' | 'desc' = 'asc'
+): T[] {
+  return arr.sort((a, b) => {
+    const keyA = keyFn(a);
+    const keyB = keyFn(b);
+
+    if (order === 'asc') {
+      return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
+    } else {
+      return keyB < keyA ? -1 : keyB > keyA ? 1 : 0;
+    }
+  });
+}

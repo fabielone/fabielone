@@ -1,5 +1,5 @@
 @app
-grunge-stack-template
+fabielone-0914
 
 @aws
 runtime nodejs18.x
