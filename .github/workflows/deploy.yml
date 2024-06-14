@@ -126,14 +126,11 @@ jobs:
           cache-dependency-path: ./package.json
           node-version: 18
 
-      - name: 👀 Env
+      - name: 👀 Print Env Variables for Debugging
         run: |
-          echo "Event name: ${{ github.event_name }}"
-          echo "Git ref:    ${{ github.ref }}"
-          echo "GH actor:   ${{ github.actor }}"
-          echo "SHA:        ${{ github.sha }}"
-          VER=`node --version`; echo "Node ver:   $VER"
-          VER=`npm --version`; echo "npm ver:    $VER"
+          echo "AWS_REGION: ${{ secrets.AWS_REGION }}"
+          echo "AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}"
+          echo "AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
       - name: 📥 Install deps
         run: npm install
@@ -149,6 +146,7 @@ jobs:
         run: arc deploy --staging --prune
         env:
           CI: true
+          AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -157,5 +155,6 @@ jobs:
         run: arc deploy --production --prune
         env:
           CI: true
+          AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
