@@ -30,7 +30,7 @@ export default function Index() {
    
     
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold">Posts</h1>
+      <h1 className="text-3xl font-bold">My Posts</h1>
       <ul className="mt-4 space-y-4">
         {data.map((post:PostMeta) => (
           <li key={post.slug}>
