@@ -51,7 +51,7 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <span className="sr-only">Open user menu</span>
-              <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user" />
+              {/* <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user" /> */}
             </button>
           ) : (
             <Link to="/login" className="text-sm text-gray-900 dark:text-white">Login</Link>
