@@ -1,26 +1,9 @@
 import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
 import matter from 'gray-matter';
 
-// Read and verify environment variables
-const region = process.env.AWS_REGION;
-const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
-
-// Log the environment variables for debugging (remove this in production)
-console.log("AWS_REGION:", region);
-console.log("AWS_ACCESS_KEY_ID:", accessKeyId ? "Set" : "Not Set");
-console.log("AWS_SECRET_ACCESS_KEY:", secretAccessKey ? "Set" : "Not Set");
-
-if (!region || !accessKeyId || !secretAccessKey) {
-    throw new Error("AWS configuration is not properly set in environment variables");
-}
-
+// Initialize the S3 client without credentials
 const s3Client = new S3Client({
-    region,
-    credentials: {
-        accessKeyId,
-        secretAccessKey
-    }
+    region: process.env.AWS_REGION // Use AWS_REGION directly from environment variables
 });
 
 export type Frontmatter = {
