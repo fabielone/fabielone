@@ -24,8 +24,6 @@
   "dependencies": {
     "@architect/architect": "^10.16.3",
     "@architect/functions": "^7.0.0",
-    "@aws-sdk/client-s3": "^3.596.0",
-    "@aws-sdk/s3-request-presigner": "^3.596.0",
     "@mdx-js/react": "^3.0.1",
     "@mdx-js/rollup": "^3.0.1",
     "@paralleldrive/cuid2": "^2.2.2",
