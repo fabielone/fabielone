@@ -1,139 +1,156 @@
-// import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
-// import matter from 'gray-matter';
+import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
+import matter from 'gray-matter';
 
-// // Initialize the S3 client without credentials
-// const s3Client = new S3Client({
-//     region: process.env.AWS_REGION // Use AWS_REGION directly from environment variables
-// });
+// Read and verify environment variables
+const region = "us-west-1";
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
-// export type Frontmatter = {
-//     title: string;
-//     description: string;
-//     published: string; // YYYY-MM-DD
-//     featured: boolean;
-// };
+// Log the environment variables for debugging (remove this in production)
+console.log("AWS_REGION:", region);
+console.log("AWS_ACCESS_KEY_ID:", accessKeyId ? "Set" : "Not Set");
+console.log("AWS_SECRET_ACCESS_KEY:", secretAccessKey ? "Set" : "Not Set");
 
-// export type PostMeta = {
-//     slug: string;
-//     frontmatter: Frontmatter;
-// };
+if (!region || !accessKeyId || !secretAccessKey) {
+    throw new Error("AWS configuration is not properly set in environment variables");
+}
 
-// export const getPosts = async (): Promise<PostMeta[]> => {
-//     try {
-//         // Fetch metadata files from S3 bucket
-//         const s3Params = {
-//             Bucket: "fabielone",
-//             Prefix: "posts/" // Assuming your metadata files are stored in "posts/" folder in S3
-//         };
-//         const command = new ListObjectsV2Command(s3Params);
-//         const s3Objects = await s3Client.send(command);
+const s3Client = new S3Client({
+    region,
+    credentials: {
+        accessKeyId,
+        secretAccessKey
+    }
+});
 
-//         // Check if Contents array is defined
-//         if (!s3Objects.Contents) {
-//             throw new Error("No metadata files found in S3 bucket.");
-//         }
+export type Frontmatter = {
+    title: string;
+    description: string;
+    published: string; // YYYY-MM-DD
+    featured: boolean;
+};
 
-//         // Parse metadata for each object
-//         const posts: PostMeta[] = await Promise.all(
-//             s3Objects.Contents.map(async (object) => {
-//                 // Ensure object.Key is defined
-//                 if (!object.Key) {
-//                     throw new Error("Object key is undefined.");
-//                 }
+export type PostMeta = {
+    slug: string;
+    frontmatter: Frontmatter;
+};
 
-//                 const fileKey = object.Key;
-//                 const getObjectParams = {
-//                     Bucket: "fabielone",
-//                     Key: fileKey
-//                 };
-//                 const getCommand = new GetObjectCommand(getObjectParams);
-//                 const data = await s3Client.send(getCommand);
+export const getPosts = async (): Promise<PostMeta[]> => {
+    try {
+        // Fetch metadata files from S3 bucket
+        const s3Params = {
+            Bucket: "fabielone",
+            Prefix: "posts/" // Assuming your metadata files are stored in "posts/" folder in S3
+        };
+        const command = new ListObjectsV2Command(s3Params);
+        const s3Objects = await s3Client.send(command);
 
-//                 // Ensure Body is defined
-//                 if (!data.Body) {
-//                     throw new Error("Object body is undefined.");
-//                 }
+        // Check if Contents array is defined
+        if (!s3Objects.Contents) {
+            throw new Error("No metadata files found in S3 bucket.");
+        }
 
-//                 // Read the stream
-//                 const bodyContents = await streamToString(data.Body);
+        // Parse metadata for each object
+        const posts: PostMeta[] = await Promise.all(
+            s3Objects.Contents.map(async (object) => {
+                // Ensure object.Key is defined
+                if (!object.Key) {
+                    throw new Error("Object key is undefined.");
+                }
 
-//                 // Parse frontmatter from MDX file using gray-matter
-//                 const { data: frontmatter } = matter(bodyContents);
+                const fileKey = object.Key;
+                const getObjectParams = {
+                    Bucket: "fabielone",
+                    Key: fileKey
+                };
+                const getCommand = new GetObjectCommand(getObjectParams);
+                const data = await s3Client.send(getCommand);
 
-//                 // Ensure the frontmatter matches the expected structure
-//                 const { title, description, published, featured } = frontmatter as Frontmatter;
+                // Ensure Body is defined
+                if (!data.Body) {
+                    throw new Error("Object body is undefined.");
+                }
 
-//                 // Construct slug from fileKey (assuming the fileKey is the slug)
-//                 const slug = fileKey.replace("posts/", "").replace(/\.mdx$/, "");
+                // Read the stream
+                const bodyContents = await streamToString(data.Body);
 
-//                 return {
-//                     slug,
-//                     frontmatter: {
-//                         title,
-//                         description,
-//                         published,
-//                         featured
-//                     }
-//                 };
-//             })
-//         );
+                // Parse frontmatter from MDX file using gray-matter
+                const { data: frontmatter } = matter(bodyContents);
 
-//         return posts;
-//     } catch (error) {
-//         console.error("Error loading posts:", error);
-//         throw error;
-//     }
-// };
+                // Ensure the frontmatter matches the expected structure
+                const { title, description, published, featured } = frontmatter as Frontmatter;
 
-// export const getPostBySlug = async (slug: string): Promise<{ frontmatter: Frontmatter; content: string }> => {
-//     try {
-//         // Construct the file key for the specific post based on its slug
-//         const fileKey = `posts/${slug}.mdx`;
+                // Construct slug from fileKey (assuming the fileKey is the slug)
+                const slug = fileKey.replace("posts/", "").replace(/\.mdx$/, "");
 
-//         // Fetch the content of the MDX file from S3 bucket
-//         const getObjectParams = {
-//             Bucket: "fabielone",
-//             Key: fileKey
-//         };
-//         const command = new GetObjectCommand(getObjectParams);
-//         const data = await s3Client.send(command);
+                return {
+                    slug,
+                    frontmatter: {
+                        title,
+                        description,
+                        published,
+                        featured
+                    }
+                };
+            })
+        );
 
-//         // Ensure Body is defined
-//         if (!data.Body) {
-//             throw new Error("Object body is undefined.");
-//         }
+        return posts;
+    } catch (error) {
+        console.error("Error loading posts:", error);
+        throw error;
+    }
+};
 
-//         // Read the stream
-//         const bodyContents = await streamToString(data.Body);
+export const getPostBySlug = async (slug: string): Promise<{ frontmatter: Frontmatter; content: string }> => {
+    try {
+        // Construct the file key for the specific post based on its slug
+        const fileKey = `posts/${slug}.mdx`;
 
-//         // Parse frontmatter and content from MDX file using gray-matter
-//         const { data: frontmatter, content } = matter(bodyContents);
+        // Fetch the content of the MDX file from S3 bucket
+        const getObjectParams = {
+            Bucket: "fabielone",
+            Key: fileKey
+        };
+        const command = new GetObjectCommand(getObjectParams);
+        const data = await s3Client.send(command);
 
-//         // Ensure the frontmatter matches the expected structure
-//         const { title, description, published, featured } = frontmatter as Frontmatter;
+        // Ensure Body is defined
+        if (!data.Body) {
+            throw new Error("Object body is undefined.");
+        }
 
-//         // Return an object containing the frontmatter and content of the post
-//         return {
-//             frontmatter: {
-//                 title,
-//                 description,
-//                 published,
-//                 featured
-//             },
-//             content
-//         };
-//     } catch (error) {
-//         console.error(`Error loading post "${slug}":`, error);
-//         throw error;
-//     }
-// };
+        // Read the stream
+        const bodyContents = await streamToString(data.Body);
 
-// // Helper function to convert stream to string
-// const streamToString = (stream: any): Promise<string> => {
-//     return new Promise((resolve, reject) => {
-//         const chunks: any[] = [];
-//         stream.on("data", (chunk: any) => chunks.push(chunk));
-//         stream.on("error", reject);
-//         stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf-8")));
-//     });
-// };
+        // Parse frontmatter and content from MDX file using gray-matter
+        const { data: frontmatter, content } = matter(bodyContents);
+
+        // Ensure the frontmatter matches the expected structure
+        const { title, description, published, featured } = frontmatter as Frontmatter;
+
+        // Return an object containing the frontmatter and content of the post
+        return {
+            frontmatter: {
+                title,
+                description,
+                published,
+                featured
+            },
+            content
+        };
+    } catch (error) {
+        console.error(`Error loading post "${slug}":`, error);
+        throw error;
+    }
+};
+
+// Helper function to convert stream to string
+const streamToString = (stream: any): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const chunks: any[] = [];
+        stream.on("data", (chunk: any) => chunks.push(chunk));
+        stream.on("error", reject);
+        stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf-8")));
+    });
+};
