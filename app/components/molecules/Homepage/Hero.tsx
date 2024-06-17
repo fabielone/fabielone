@@ -11,9 +11,8 @@ const Hero: React.FC = () => {
           <a href="/" className="text-4xl text-gray-400 font-extrabold">YOGA</a>
         </div>
 
-        <label htmlFor="menu-toggle" className="pointer-cursor md:hidden block" onClick={() => setMenuOpen(!menuOpen)}>
           <FaBars className="fill-current text-gray-600" />
-        </label>
+        
         <input className="hidden" type="checkbox" id="menu-toggle" checked={menuOpen} onChange={() => setMenuOpen(!menuOpen)} />
 
         <div className={`md:flex md:items-center md:w-auto w-full ${menuOpen ? '' : 'hidden'}`} id="menu">
