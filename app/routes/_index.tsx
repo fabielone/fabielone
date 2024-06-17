@@ -6,6 +6,7 @@
 import { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 
+import Hero from "~/components/molecules/Homepage/Hero";
 import { useOptionalUser } from "~/utils";
 
 //import { getPosts, PostMeta } from "../.server/posts"; // Import getPosts function and PostMeta type
@@ -33,6 +34,7 @@ export default function Index() {
    
     
     <div className="container mx-auto px-4 py-8">
+      <Hero />
       <h1 className="text-3xl font-bold">My Posts</h1>
       <ul className="mt-4 space-y-4">
         {/* {data.map((post:PostMeta) => (
