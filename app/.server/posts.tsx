@@ -1,27 +1,8 @@
 import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
 import matter from 'gray-matter';
 
-// Read and verify environment variables
-const region = process.env.AWS_REGION || "us-west-1";
-const accessKeyId = process.env.MY_AWS_ACCESS_KEY_ID;
-const secretAccessKey = process.env.MY_AWS_SECRET_ACCESS_KEY;
-
-// Log the environment variables for debugging (remove this in production)
-console.log("AWS_REGION:", region);
-console.log("MY_AWS_ACCESS_KEY_ID:", accessKeyId ? "Set" : "Not Set");
-console.log("MY_AWS_SECRET_ACCESS_KEY:", secretAccessKey ? "Set" : "Not Set");
-
-if (!region || !accessKeyId || !secretAccessKey) {
-    throw new Error("AWS configuration is not properly set in environment variables");
-}
-
-const s3Client = new S3Client({
-    region,
-    credentials: {
-        accessKeyId,
-        secretAccessKey
-    }
-});
+// Create an S3 client without explicitly passing credentials
+const s3Client = new S3Client();
 
 export type Frontmatter = {
     title: string;
@@ -37,7 +18,6 @@ export type PostMeta = {
 
 export const getPosts = async (): Promise<PostMeta[]> => {
     try {
-        // Fetch metadata files from S3 bucket
         const s3Params = {
             Bucket: "fabielone",
             Prefix: "posts/" // Assuming your metadata files are stored in "posts/" folder in S3
