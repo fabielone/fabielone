@@ -19,6 +19,7 @@ export type PostMeta = {
 export const getPosts = async (): Promise<PostMeta[]> => {
     try {
         const s3Params = {
+            Region: "us-west-1",
             Bucket: "fabielone",
             Prefix: "posts/" // Assuming your metadata files are stored in "posts/" folder in S3
         };
