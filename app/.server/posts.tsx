@@ -2,7 +2,7 @@ import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/clien
 import matter from 'gray-matter';
 
 // Create an S3 client without explicitly passing credentials
-const s3Client = new S3Client({ region: "us-west-1" });
+const s3Client = new S3Client();
 
 export type Frontmatter = {
     title: string;
