@@ -36,7 +36,7 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
   const subMenuItems = getSubMenuItems(location.pathname);
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="absolute top-0 left-0 w-full z-10 bg-transparent">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">fabiel.one</span>
@@ -51,7 +51,7 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <span className="sr-only">Open user menu</span>
-              {/* <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user" /> */}
+              <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user" />
             </button>
           ) : (
             <Link to="/login" className="text-sm text-gray-900 dark:text-white">Login</Link>
