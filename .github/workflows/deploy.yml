@@ -110,7 +110,7 @@ jobs:
           wait-on: "http://localhost:8811"
         env:
           PORT: "8811"
-          MY_AWS_REGION: ${{ secrets.AWS_REGION }}
+          MY_AWS_REGION: "us-west-1"
           MY_AWS_ACCESS_KEY_ID: ${{ secrets.MY_AWS_ACCESS_KEY_ID }}
           MY_AWS_SECRET_ACCESS_KEY: ${{ secrets.MY_AWS_SECRET_ACCESS_KEY }}
 
