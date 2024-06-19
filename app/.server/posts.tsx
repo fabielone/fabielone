@@ -2,7 +2,7 @@ import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/clien
 import matter from 'gray-matter';
 
 // Create an S3 client without explicitly passing credentials
-const s3Client = new S3Client();
+const s3Client = new S3Client({ region: "us-west-1" });
 
 export type Frontmatter = {
     title: string;
@@ -19,7 +19,6 @@ export type PostMeta = {
 export const getPosts = async (): Promise<PostMeta[]> => {
     try {
         const s3Params = {
-            Region: "us-west-1",
             Bucket: "fabielone",
             Prefix: "posts/" // Assuming your metadata files are stored in "posts/" folder in S3
         };
