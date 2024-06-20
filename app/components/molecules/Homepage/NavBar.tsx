@@ -1,10 +1,13 @@
+// NavBar.tsx
 import { Link, useLocation } from '@remix-run/react';
 import { useState } from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
 
+import { User } from '~/models/user.server';
 
-// import { IoIosSearch } from "react-icons/io";
+//import FadeInOut from './Drawer';
 
-import  {User}  from "~/models/user.server";
+//import Drawer from './Drawer';
 
 const getSubMenuItems = (pathname: string) => {
   switch (pathname) {
@@ -12,11 +15,10 @@ const getSubMenuItems = (pathname: string) => {
       return [
         { name: 'Projects', path: '/projects' },
         { name: 'Services', path: '/projects' },
-        { name: 'Linktree', path: '/linktree' },
         { name: 'Classes', path: '/classes' },
         { name: 'Blog', path: '/blog' },
       ];
-    case '/bus':
+    case '/about':
       return [
         { name: 'Category 1', path: '/bus/category1' },
         { name: 'Category 2', path: '/bus/category2' },
@@ -28,102 +30,85 @@ const getSubMenuItems = (pathname: string) => {
   }
 };
 
-
 export const NavBar = ({ user }: { user: User | undefined }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const location = useLocation();
   const subMenuItems = getSubMenuItems(location.pathname);
+  const isHomePage = location.pathname === '/';
+
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+ // const closeDrawer = () => setIsDrawerOpen(false);
 
   return (
-    <nav className="absolute top-0 left-0 w-full z-10 bg-transparent">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">fabiel.one</span>
-        </Link>
-        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {user ? (
+    <>
+      <nav className={`w-full z-10 ${isHomePage ? 'absolute top-0 left-0 bg-transparent' : 'relative bg-white shadow-md'}`}>
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+          <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <span className={`self-center text-2xl font-bold whitespace-nowrap ${isHomePage ? 'text-white text-shadow-custom' : 'text-black'}`}>fabiel.one</span>
+          </Link>
+          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            {user ? (
+              <button
+                type="button"
+                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                id="user-menu-button"
+                aria-expanded={isDrawerOpen}
+                onClick={toggleDrawer}
+              >
+                <span className="sr-only">Open user menu</span>
+                <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user" />
+              </button>
+            ) : (
+              <>
+                <Link to="/login" className="text-sm font-bold text-gray-500 drop-shadow-md">Login</Link>
+                <span className="text-sm text-white font-bold"> | </span>
+                <Link to="/join" className="text-sm font-bold text-gray-500">Sign Up</Link>
+              </>
+            )}
             <button
               type="button"
-              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-              id="user-menu-button"
-              aria-expanded={isDropdownOpen}
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="navbar-user"
+              aria-expanded={isDrawerOpen}
+              onClick={toggleDrawer}
             >
-              <span className="sr-only">Open user menu</span>
-              <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user" />
+              <span className="sr-only">Open main menu</span>
+              <AiOutlineMenu className="w-6 h-6 text-current text-shadow-custom" aria-hidden="true" />
             </button>
-          ) : (
-            <Link to="/login" className="text-sm text-gray-900 dark:text-white">Login</Link>
-          )}
-          {isDropdownOpen ? <div
-              className="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 absolute right-0 mt-2"
-              id="user-dropdown"
-            >
-              <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-              </div>
-              <ul className="py-2" aria-labelledby="user-menu-button">
-                <li>
-                  <Link to="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</Link>
-                </li>
-                <li>
-                  <Link to="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</Link>
-                </li>
-                <li>
-                  <Link to="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</Link>
-                </li>
-                <li>
-                  <Link to="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</Link>
-                </li>
-              </ul>
-            </div> : null}
-          <button
-            data-collapse-toggle="navbar-user"
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-user"
-            aria-expanded={isMenuOpen}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-            </svg>
-          </button>
+          </div>
+          <div className="hidden md:flex items-center justify-between w-full md:w-auto md:order-1" id="navbar-user">
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                <Link to="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</Link>
+              </li>
+              <li>
+                <Link to="/about" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</Link>
+              </li>
+              <li>
+                <Link to="/services" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</Link>
+              </li>
+              <li>
+                <Link to="/pricing" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</Link>
+              </li>
+              <li>
+                <Link to="/contact" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</Link>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className={`items-center justify-between ${isMenuOpen ? 'flex' : 'hidden'} w-full md:flex md:w-auto md:order-1`} id="navbar-user">
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <Link to="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</Link>
-            </li>
-            <li>
-              <Link to="/about" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</Link>
-            </li>
-            <li>
-              <Link to="/services" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</Link>
-            </li>
-            <li>
-              <Link to="/pricing" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</Link>
-            </li>
-            <li>
-              <Link to="/contact" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</Link>
-            </li>
-          </ul>
+        <div className={`${isHomePage ? 'bg-transparent' : 'bg-white'} py-2`}>
+          <div className="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between px-4">
+            {subMenuItems.map((item) => (
+              <Link key={item.path} to={item.path} className={`text-shadow-custom hover:underline px-3 py-2 ${isHomePage ? 'text-white dark:text-white' : 'text-black dark:text-black'}`}>
+                {item.name}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="bg-gray-100 dark:bg-gray-800 py-2">
-        <div className="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between px-4">
-          {subMenuItems.map((item) => (
-            <Link key={item.path} to={item.path} className="text-gray-900 dark:text-white hover:underline px-3 py-2">
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </nav>
+      </nav>
+      {/* <Drawer show={isDrawerOpen} onClose={closeDrawer} /> */}
+      {/* <Drawer/> */}
+      {/* <FadeInOut isVisible={true}></FadeInOut> */}
+    </>
   );
 };
-
-

@@ -3,7 +3,7 @@ import { FaChevronRight, FaFacebook, FaInstagram, FaWhatsapp, FaUserCircle } fro
 
 const Hero: React.FC = () => {
   
-const background = 'https://fabielone.s3.us-west-1.amazonaws.com/portfolio/Design3.png';
+const background = 'https://fabielone.s3.us-west-1.amazonaws.com/portfolio/Designer.jpeg';
   return (
     <div className="w-full h-screen bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url('${background}')` }}>
   <div className="w-[90%] mx-auto h-full flex items-center justify-between py-10">
