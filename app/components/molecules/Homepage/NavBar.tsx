@@ -1,13 +1,8 @@
-// NavBar.tsx
 import { Link, useLocation } from '@remix-run/react';
 import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import { User } from '~/models/user.server';
-
-//import FadeInOut from './Drawer';
-
-//import Drawer from './Drawer';
 
 const getSubMenuItems = (pathname: string) => {
   switch (pathname) {
@@ -37,7 +32,7 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
   const isHomePage = location.pathname === '/';
 
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
- // const closeDrawer = () => setIsDrawerOpen(false);
+  const closeDrawer = () => setIsDrawerOpen(false);
 
   return (
     <>
@@ -106,9 +101,37 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
           </div>
         </div>
       </nav>
-      {/* <Drawer show={isDrawerOpen} onClose={closeDrawer} /> */}
-      {/* <Drawer/> */}
-      {/* <FadeInOut isVisible={true}></FadeInOut> */}
+      {isDrawerOpen ? <div className="fixed inset-0 bg-gray-800 bg-opacity-50 z-20" onClick={closeDrawer}>
+          <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-md transform transition-transform duration-300 ease-in-out translate-x-0">
+            <div className="p-4">
+              <button
+                type="button"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                onClick={closeDrawer}
+              >
+                <span className="sr-only">Close menu</span>
+                ✕
+              </button>
+            </div>
+            <ul className="flex flex-col font-medium p-4 space-y-4">
+              <li>
+                <Link to="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" onClick={closeDrawer}>Home</Link>
+              </li>
+              <li>
+                <Link to="/about" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" onClick={closeDrawer}>About</Link>
+              </li>
+              <li>
+                <Link to="/services" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" onClick={closeDrawer}>Services</Link>
+              </li>
+              <li>
+                <Link to="/pricing" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" onClick={closeDrawer}>Pricing</Link>
+              </li>
+              <li>
+                <Link to="/contact" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" onClick={closeDrawer}>Contact</Link>
+              </li>
+            </ul>
+          </div>
+        </div> : null}
     </>
   );
 };

@@ -35,7 +35,6 @@
     "@mdx-js/react": "^3.0.1",
     "@mdx-js/rollup": "^3.0.1",
     "@paralleldrive/cuid2": "^2.2.2",
-    "@react-spring/web": "^9.7.3",
     "@remix-run/architect": "^2.9.2",
     "@remix-run/css-bundle": "^2.9.2",
     "@remix-run/node": "^2.9.2",
