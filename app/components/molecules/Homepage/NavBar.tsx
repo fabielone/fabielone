@@ -1,6 +1,6 @@
 import { Link, useLocation } from '@remix-run/react';
 import { useState } from 'react';
-//import { AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 import { User } from '~/models/user.server';
 
@@ -69,7 +69,7 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
               onClick={toggleDrawer}
             >
               <span className="sr-only">Open main menu</span>
-              {/* <AiOutlineMenu className="w-6 h-6 text-current text-shadow-custom" aria-hidden="true" /> */}
+              <AiOutlineMenu className="w-6 h-6 text-current text-shadow-custom" aria-hidden="true" />
             </button>
           </div>
           <div className="hidden md:flex items-center justify-between w-full md:w-auto md:order-1" id="navbar-user">

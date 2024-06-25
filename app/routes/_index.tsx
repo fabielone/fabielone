@@ -4,7 +4,7 @@ import { Link} from "@remix-run/react";
 //import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
 
-//import Hero from "~/components/molecules/Homepage/Hero";
+import Hero from "~/components/molecules/Homepage/Hero";
 import ServicesSection from "~/components/molecules/Homepage/Services";
 import { useOptionalUser } from "~/utils";
 
@@ -36,7 +36,7 @@ export default function Index() {
     <>
     
    
-    {/* <Hero /> */}
+    <Hero />
     <animated.div
       style={{
         width: 80,
