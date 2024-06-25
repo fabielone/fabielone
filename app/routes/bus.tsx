@@ -1,41 +1,43 @@
-import type { LoaderFunction, MetaFunction } from "@remix-run/node"
-import { Link, useLoaderData } from "@remix-run/react";
+//import type { LoaderFunction, MetaFunction } from "@remix-run/node"
+import type {  MetaFunction } from "@remix-run/node"
+import { Link} from "@remix-run/react";
+//import { Link, useLoaderData } from "@remix-run/react";
 //import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
 
 
-import Hero from "~/components/molecules/Homepage/Hero";
+//import Hero from "~/components/molecules/Homepage/Hero";
 import { useOptionalUser } from "~/utils";
 
-import { getPosts, PostMeta } from "../.server/posts"; // Import getPosts function and PostMeta type
+//import { getPosts, PostMeta } from "../.server/posts"; // Import getPosts function and PostMeta type
 
 
 export const meta: MetaFunction = () => [{ title: "Remix Notes" }];
 
-export const loader: LoaderFunction = async () => {
-  try {
-    const posts: PostMeta[] = await getPosts(); // Fetch posts using getPosts function
-    return posts;
-  } catch (error) {
-    console.error("Error loading posts:", error);
-    throw error;
-  }
-};
+// export const loader: LoaderFunction = async () => {
+//   try {
+//     const posts: PostMeta[] = await getPosts(); // Fetch posts using getPosts function
+//     return posts;
+//   } catch (error) {
+//     console.error("Error loading posts:", error);
+//     throw error;
+//   }
+// };
 
 export default function Bus() {
   const user = useOptionalUser();
-  const data = useLoaderData<typeof loader>();
+  //const data = useLoaderData<typeof loader>();
 
   return (
     <>
     
-    <Hero />
+    {/* <Hero /> */}
     
     <div className="container mx-auto px-4 py-8">
       
       <h1 className="text-3xl font-bold">My Posts</h1>
       <ul className="mt-4 space-y-4">
-        {data.map((post:PostMeta) => (
+        {/* {data.map((post:PostMeta) => (
           <li key={post.slug}>
             <Link to={`/posts/${post.slug}`} className="text-blue-500 hover:underline">
               {post.frontmatter.title}
@@ -44,7 +46,7 @@ export default function Bus() {
             <p>{post.frontmatter.published}</p>
             <p>{post.frontmatter.featured}</p>
           </li>
-        ))}
+        ))} */}
       </ul>
     </div>
 

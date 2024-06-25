@@ -1,16 +1,17 @@
+import { useSpring, animated } from '@react-spring/web'
 import type {  MetaFunction } from "@remix-run/node"
 import { Link} from "@remix-run/react";
 //import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
 
-
-import Hero from "~/components/molecules/Homepage/Hero";
+//import Hero from "~/components/molecules/Homepage/Hero";
+import ServicesSection from "~/components/molecules/Homepage/Services";
 import { useOptionalUser } from "~/utils";
 
 //import { getPosts, PostMeta } from "../.server/posts"; // Import getPosts function and PostMeta type
 
 
-export const meta: MetaFunction = () => [{ title: "Remix Notes" }];
+export const meta: MetaFunction = () => [{ title: "Fabiel Ramirez: Full Stack Web Developer, AI consulting and Coding Instructor" }];
 
 // export const loader: LoaderFunction = async () => {
 //   try {
@@ -25,12 +26,27 @@ export const meta: MetaFunction = () => [{ title: "Remix Notes" }];
 export default function Index() {
   const user = useOptionalUser();
   // const data = useLoaderData<typeof loader>();
+  const springs = useSpring({
+    from: { x: 0 },
+    to: { x: 100 },
+  })
+
 
   return (
     <>
     
-    <Hero />
-    
+   
+    {/* <Hero /> */}
+    <animated.div
+      style={{
+        width: 80,
+        height: 80,
+        background: '#ff6d6d',
+        borderRadius: 8,
+        ...springs,
+      }}
+    />
+    <ServicesSection />
     {/* <div className="container mx-auto px-4 py-8">
       
       <h1 className="text-3xl font-bold">My Posts</h1>

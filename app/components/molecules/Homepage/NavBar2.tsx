@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react';
 import { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
+//import { FaBars } from 'react-icons/fa';
 
 import  {User}  from "~/models/user.server";
 
@@ -16,7 +16,7 @@ export default function Navabar2 ({ user }: { user: User | undefined }) {
           <a href="/" className="text-4xl text-gray-400 font-extrabold">F</a>
         </div>
 
-          <FaBars className="fill-current text-gray-600" />
+          {/* <FaBars className="fill-current text-gray-600" /> */}
         
         <input className="hidden" type="checkbox" id="menu-toggle" checked={menuOpen} onChange={() => setMenuOpen(!menuOpen)} />
 

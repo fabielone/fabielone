@@ -16,9 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"],
-      "flowbite-react/tailwind": ["node_modules/flowbite-react/dist/types/tailwind"]
-      
+      "~/*": ["./app/*"]
     },
     "skipLibCheck": true,
 
