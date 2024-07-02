@@ -24,12 +24,14 @@ const MD: React.FC = () => {
   const post = useLoaderData<typeof loader>();
 
   // Destructure frontmatter and content from post
-  // const { frontmatter, content } = post;
-  const {content} = post;
-
+  const { frontmatter, content } = post;
+ 
  
   return (
     <article className="prose">
+      {frontmatter.title}
+      <br></br>
+      {frontmatter.description}
       {/* Render the parsed MDX content */}
       <ReactMarkdown  remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
     </article>

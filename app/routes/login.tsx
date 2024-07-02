@@ -6,6 +6,7 @@ import type {
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
+import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa"; // Import icons
 
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
@@ -174,6 +175,29 @@ export default function LoginPage() {
             </div>
           </div>
         </Form>
+        <div className="mt-4 flex flex-col space-y-2">
+          <button
+            onClick={() => (window.location.href = "/auth/google")}
+            className="flex items-center justify-center space-x-2 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:bg-red-400"
+          >
+            <FaGoogle />
+            <span>Log in with Google</span>
+          </button>
+          <button
+            onClick={() => (window.location.href = "/auth/facebook")}
+            className="flex items-center justify-center space-x-2 rounded bg-blue-700 px-4 py-2 text-white hover:bg-blue-800 focus:bg-blue-600"
+          >
+            <FaFacebook />
+            <span>Log in with Facebook</span>
+          </button>
+          <button
+            onClick={() => (window.location.href = "/auth/github")}
+            className="flex items-center justify-center space-x-2 rounded bg-gray-800 px-4 py-2 text-white hover:bg-gray-900 focus:bg-gray-700"
+          >
+            <FaGithub />
+            <span>Log in with GitHub</span>
+          </button>
+        </div>
       </div>
     </div>
   );

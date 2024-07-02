@@ -15,6 +15,8 @@ import {
 import { getUser } from "~/session.server";
 import stylesheet from "~/tailwind.css";
 
+import ContactSection from "./components/molecules/Homepage/Contact";
+import Footer from "./components/molecules/Homepage/Footer";
 import { NavBar } from "./components/molecules/Homepage/NavBar";
 import { useOptionalUser } from "./utils";
 
@@ -41,6 +43,8 @@ export default function App() {
       <body className="h-full">
         <NavBar user={user} />
         <Outlet />
+        <ContactSection user={user} />
+        <Footer />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
