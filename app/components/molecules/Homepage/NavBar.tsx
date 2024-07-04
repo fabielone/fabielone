@@ -29,7 +29,6 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const location = useLocation();
   const subMenuItems = getSubMenuItems(location.pathname);
-  const isHomePage = location.pathname === '/';
 
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
   const closeDrawer = () => setIsDrawerOpen(false);
@@ -37,10 +36,10 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
 
   return (
     <>
-      <nav className={`w-full z-10 ${isHomePage ? 'absolute top-0 left-0 bg-transparent' : 'relative bg-white shadow-md'}`}>
+      <nav className={`w-full z-10 `}>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
           <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <span className={`self-center text-2xl font-bold whitespace-nowrap ${isHomePage ? 'text-white text-shadow-custom' : 'text-black'}`}>fabiel.one</span>
+            <span className={`self-center text-2xl font-bold whitespace-nowrap`}>fabiel.one</span>
           </Link>
           <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             {user ? (
@@ -92,10 +91,10 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
             </ul>
           </div>
         </div>
-        <div className={`${isHomePage ? 'bg-transparent' : 'bg-white'} py-2`}>
+        <div className={` py-2`}>
           <div className="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between px-4">
             {subMenuItems.map((item) => (
-              <Link key={item.path} to={item.path} className={`text-shadow-custom hover:underline px-3 py-2 ${isHomePage ? 'text-white dark:text-white' : 'text-black dark:text-black'}`}>
+              <Link key={item.path} to={item.path} className={`text-shadow-custom hover:underline px-3 py-2 `}>
                 {item.name}
               </Link>
             ))}
