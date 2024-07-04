@@ -12,12 +12,13 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import { getUser } from "~/session.server";
+
 import stylesheet from "~/tailwind.css";
 
 import ContactSection from "./components/molecules/Homepage/Contact";
 import Footer from "./components/molecules/Homepage/Footer";
 import { NavBar } from "./components/molecules/Homepage/NavBar";
+import { authenticator } from "./services/auth.server";
 import { useOptionalUser } from "./utils";
 
 export const links: LinksFunction = () => [
@@ -26,7 +27,8 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  return json({ user: await getUser(request) });
+  const user = await authenticator.isAuthenticated(request);
+  return json({ user });
 };
 
 export default function App() {
