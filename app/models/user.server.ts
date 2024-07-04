@@ -55,11 +55,21 @@ export async function createUser(
     email,
   });
 
+ 
   const user = await getUserByEmail(email);
   invariant(user, `User not found after being created. This should not happen`);
 
   return user;
 }
+
+export async function createUserSocial(email: string): Promise<User> {
+  const db = await arc.tables();
+  const newUser = { pk: `email#${email}`, email };
+  await db.user.put(newUser);
+
+  return { id: `email#${email}`, email };
+};
+
 
 export async function deleteUser(email: User["email"]) {
   const db = await arc.tables();
