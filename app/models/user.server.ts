@@ -65,8 +65,14 @@ export async function createUser(
 export async function createUserSocial(
   email: User["email"],
 ) {
-  const db = await arc.tables();
+  const hashedPassword = await bcrypt.hash("password", 10);
 
+ 
+  const db = await arc.tables();
+  await db.password.put({
+    pk: `email#${email}`,
+    password: hashedPassword,
+  });
   await db.user.put({
     pk: `email#${email}`,
     email,
