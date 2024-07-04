@@ -62,13 +62,24 @@ export async function createUser(
   return user;
 }
 
-export async function createUserSocial(email: string): Promise<User> {
+export async function createUserSocial(
+  email: User["email"],
+) {
   const db = await arc.tables();
-  const newUser = { pk: `email#${email}`, email };
-  await db.user.put(newUser);
 
-  return { id: `email#${email}`, email };
-};
+  await db.user.put({
+    pk: `email#${email}`,
+    email,
+  });
+
+ 
+  const user = await getUserByEmail(email);
+  invariant(user, `User not found after being created. This should not happen`);
+
+  return user;
+}
+
+
 
 
 export async function deleteUser(email: User["email"]) {
