@@ -38,7 +38,7 @@ authenticator.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID||'',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET||'',
-      callbackURL: 'https://b9a8-189-202-94-118.ngrok-free.app/auth/google/callback',
+      callbackURL: 'https://fabiel.one/auth/google/callback',
     },
     async ({  profile }) => {
         //accessToken, refreshToken, extraParams,
