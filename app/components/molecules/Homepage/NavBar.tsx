@@ -9,7 +9,7 @@ const getSubMenuItems = (pathname: string) => {
     case '/':
       return [
         { name: 'Projects', path: '/projects' },
-        { name: 'Services', path: '/projects' },
+        { name: 'Services', path: '/services' },
         { name: 'Classes', path: '/classes' },
         { name: 'Blog', path: '/blog' },
       ];
@@ -36,10 +36,11 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
 
   return (
     <>
-      <nav className={`w-full z-10 `}>
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+      <nav className={`w-full z-10`}>
+        <div className=" bg-slate-900 shadow-sm max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+        
           <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <span className={`self-center text-2xl font-bold whitespace-nowrap`}>fabiel.one</span>
+            <span className={`self-center text-slate-200 shadow-xl text-2xl font-bold whitespace-nowrap`}>fabiel.one</span>
           </Link>
           <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             {user ? (
@@ -72,36 +73,37 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
             </button>
           </div>
           <div className="hidden md:flex items-center justify-between w-full md:w-auto md:order-1" id="navbar-user">
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
               <li>
-                <Link to="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</Link>
+                <Link to="/" className={`block py-2 px-3 trounded ${location.pathname=="/"?"text-blue-700":"text-white"} md:p-0 `} aria-current="page">Home</Link>
               </li>
               <li>
-                <Link to="/about" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</Link>
+                <Link to="/about" className={`block py-2 px-3 trounded ${location.pathname=="/about"?"text-blue-700":"text-white"} md:p-0 `}>About</Link>
               </li>
               <li>
-                <Link to="/services" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</Link>
+                <Link to="/services" className={`block py-2 px-3 trounded ${location.pathname=="/services"?"text-blue-700":"text-white"} md:p-0 `}>Services</Link>
               </li>
               <li>
-                <Link to="/pricing" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</Link>
+                <Link to="/pricing" className={`block py-2 px-3 trounded ${location.pathname=="/pricing"?"text-blue-700":"text-white"} md:p-0 `}>Pricing</Link>
               </li>
               <li>
-                <Link to="/contact" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</Link>
+                <Link to="/contact" className={`block py-2 px-3 trounded ${location.pathname=="/contact"?"text-blue-700":"text-white"} md:p-0 `}>Contact</Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className={` py-2`}>
-          <div className="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between px-4">
+        <div className={`bg-transparent`}>
+          <div className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% max-w-screen-xl mx-auto flex flex-wrap items-center justify-between px-4">
             {subMenuItems.map((item) => (
-              <Link key={item.path} to={item.path} className={`text-shadow-custom hover:underline px-3 py-2 `}>
+              <Link key={item.path} to={item.path} className={`text-white text-shadow-custom hover:underline px-3 py-2 `}>
                 {item.name}
               </Link>
             ))}
           </div>
         </div>
       </nav>
-     {/* Drawer for mobile */}
+
+       {/* Drawer for mobile */}
      <div className={`fixed inset-0 z-40 ${isDrawerOpen ? 'block' : 'hidden'}`} role="dialog">
         <button className="fixed inset-0 bg-gray-800 bg-opacity-50" onClick={closeDrawer}></button>
         <div className="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 overflow-y-auto transform transition-transform duration-300 ease-in-out">
@@ -125,10 +127,8 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
         </div>
       </div>
 
-     
-      
-
-            {/* Drawer component */}
+    
+    {/* Drawer component */}
             <div
                 id="drawer-navigation"
                 className={`fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${
