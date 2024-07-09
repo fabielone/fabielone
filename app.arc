@@ -23,6 +23,10 @@ plugin-remix
 @tables
 user
   pk *String
+  firstName String
+  lastName String
+  birthDate String
+  profilePic String
 
 password
   pk *String # userId

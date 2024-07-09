@@ -30,7 +30,8 @@ authenticator.use(
 
     // Return the user as the Authenticator expects it
     return user;
-  })
+  }),
+  "user-pass"
 );
 
 authenticator.use(
