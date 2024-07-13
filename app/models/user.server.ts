@@ -5,6 +5,9 @@ import invariant from "tiny-invariant";
 export interface User {
   id: `email#${string}`;
   email: string;
+  fName: string;
+  lName: string;
+  googleId:string;
 }
 export interface Password {
   password: string;
@@ -18,7 +21,7 @@ export async function getUserById(id: User["id"]): Promise<User | null> {
   });
 
   const [record] = result.Items;
-  if (record) return { id: record.pk, email: record.email };
+  if (record) return { id: record.pk, email: record.email, lName:record.lName,fName:record.fName,googleId:record.googleId };
   return null;
 }
 

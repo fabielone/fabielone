@@ -11,6 +11,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { ThemeModeScript } from "flowbite-react";
+
 
 
 import stylesheet from "~/tailwind.css";
@@ -41,6 +43,7 @@ export default function App() {
         <link rel="icon" href="/_static/favicon.ico" />
         <Meta />
         <Links />
+        <ThemeModeScript />
       </head>
       <body className="h-full">
         <NavBar user={user} />

@@ -45,6 +45,9 @@ authenticator.use(
         //accessToken, refreshToken, extraParams,
       // Check if the user exists in the database
       const email = profile.emails[0].value;
+      // const fName = profile.name.givenName;
+      // const lName = profile.name.givenName;
+      // const googleId = profile.id;
       let user = await getUserByEmail(email);
 
       if (!user) {

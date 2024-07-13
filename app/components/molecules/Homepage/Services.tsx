@@ -19,7 +19,7 @@ const services = [
         ],
     },
     {
-        category: 'Online Consulting',
+        category: 'AI Solutions',
         subServices: [
             { name: 'Per Hour Rate', description: 'Flexible consulting services per hour.' },
             { name: 'Project Management', description: 'Expert guidance for your projects.' },

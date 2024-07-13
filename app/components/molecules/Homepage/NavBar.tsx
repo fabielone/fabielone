@@ -1,4 +1,5 @@
 import { Link, useLocation } from '@remix-run/react';
+//import Avatar from 'flowbite-react';
 import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
@@ -38,7 +39,7 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
     <>
       <nav className={`w-full z-10`}>
         <div className=" bg-slate-900 shadow-sm max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
-        
+       
           <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
             <span className={`self-center text-slate-200 shadow-xl text-2xl font-bold whitespace-nowrap`}>fabiel.one</span>
           </Link>
@@ -52,7 +53,7 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
                 onClick={toggleDrawer}
               >
                 <span className="sr-only">Open user menu</span>
-                <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user" />
+               
               </button>
             ) : (
               <>
