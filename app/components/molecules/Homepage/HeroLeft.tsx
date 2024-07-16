@@ -1,5 +1,6 @@
 
-import {Avatar} from 'flowbite-react';
+import {Avatar, Button} from 'flowbite-react';
+import { IoIosCalendar } from "react-icons/io";
 
 import Pills, { PillsProps } from '../../atoms/Pills';
 
@@ -24,22 +25,25 @@ import Pills, { PillsProps } from '../../atoms/Pills';
                 </div>
                 <div className="flex items-start">
                 <Avatar img={"https://avatars.githubusercontent.com/u/64607173?v=4"} className='p-2'/>
-                <h1 className="p-2 max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+                
+               <div className="flex flex-col"> 
+                <p className="p-1 max-w-lg font-semibold font-sans text-lg tracking-tight text-gray-900 sm:text-lg sm:leading-none">
                 {heading}
-                </h1>
+                </p>
+                <p className='font-mono p-1'>Software Engineer </p>
                 </div>
-                <h2 className="text-xl text-gray-600 mt-2">{punchline}</h2>
+                </div>
+                <h1 className="font-bold p-2 text-2xl text-center "> Fabiel: Expert Web Development and Online Business Solutions in Tijuana </h1>
+                <h2 className="font-sans text-xl text-gray-600 mt-2">{punchline}</h2>
             </div>
             <div className="flex items-center mb-6">
-                <a
-                href="/schedule-consultation"
-                className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                >
-                Schedule Free Consultation
-                </a>
+            <Button className=" bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
+                Free Consultation
+                <IoIosCalendar  className="ml-2 h-5 w-5" />
+            </Button>
                 <a
                 href="/contact"
-                className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                className="inline-flex shadow-md items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
                 >
                 Contact Form
                 </a>

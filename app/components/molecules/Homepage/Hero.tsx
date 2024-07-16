@@ -7,10 +7,10 @@ import HeroRight from "./HeroRight";
 export default function Hero() {  
 
   const pills : PillsProps[] = [
-    {text:"Web Developer",color: "text-white",bgColor: "bg-blue-600"},
-    {text:"AI Architect",color: "text-white",bgColor: "bg-green-600"},
-    {text:"Project Manager",color: "text-white",bgColor: "bg-purple-600"},
-    {text:"Coding Instructor",color: "text-white",bgColor: "bg-red-600"},];
+    {text:"Web Developer",color: "text-gray-500",bgColor: "bg-transparent"},
+    {text:"AI Architect",color: "text-gray-500",bgColor: "bg-transparent"},
+    {text:"Project Manager",color: "text-gray-500",bgColor: "bg-transparent"},
+    {text:"Coding Instructor",color: "text-gray-500",bgColor: "bg-transparent"},];
 
   const punch = `Elavate your online presence with our eCommerce solutions. 
   Integrate our services gradually or opt for a full solution, either way we are here to maximize your business potential. TAKE THE NEXT STEP TOWARDS SUCCESS TODAY.
