@@ -118,7 +118,7 @@ export default function Index() {
       buttonText="Get started"
       buttonLink="/get-started"
       learnMoreLink="/learn-more"
-      imageUrl="https://kitwind.io/assets/kometa/full-browser.png"
+      imageUrl="https://fabielone.s3.us-west-1.amazonaws.com/portfolio/webdev"
       imagePosition='right'
       items={items}
     />
@@ -130,7 +130,7 @@ export default function Index() {
       buttonText="Get started"
       buttonLink="/get-started"
       learnMoreLink="/learn-more"
-      imageUrl="https://kitwind.io/assets/kometa/full-browser.png"
+      imageUrl="https://fabielone.s3.us-west-1.amazonaws.com/portfolio/onlinemarketing"
       imagePosition='left'
       items={items}
     />
@@ -143,7 +143,7 @@ export default function Index() {
       buttonText="Get started"
       buttonLink="/get-started"
       learnMoreLink="/learn-more"
-      imageUrl="https://kitwind.io/assets/kometa/full-browser.png"
+      imageUrl="https://fabielone.s3.us-west-1.amazonaws.com/portfolio/aisolutions"
       imagePosition='right'
       items={items}
     />

@@ -41,7 +41,7 @@ export const NavBar = ({ user }: { user: User | undefined }) => {
         <div className=" bg-slate-900 shadow-sm max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
        
           <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <span className={`self-center text-slate-200 shadow-xl text-2xl font-bold whitespace-nowrap`}>fabiel.one</span>
+            <span className={`self-center text-slate-200 shadow-xl text-2xl font-bold whitespace-nowrap`}>FABIEL.ONE</span>
           </Link>
           <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             {user ? (
