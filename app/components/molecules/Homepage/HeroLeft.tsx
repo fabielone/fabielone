@@ -11,7 +11,7 @@ interface HeroLeftProps {
 
 export default function HeroLeft({ heading, punchline, pills }: HeroLeftProps) {
   return (
-    <div className="relative h-full px-4 pt-16 mx-auto lg:py-16 bg-gray-50 border">
+    <div className="relative h-full px-4 pt-16 mx-auto lg:py-16">
       <div className="max-w-xl h-full mx-auto lg:flex">
         <div className="mb-16 h-full lg:mb-0">
           <div className="bg-white border rounded-lg p-6 h-full">
@@ -36,8 +36,9 @@ export default function HeroLeft({ heading, punchline, pills }: HeroLeftProps) {
               <hr className="border-t border-gray-300 my-4" />
               <p className="text-xl text-gray-600 mt-2 mb-4">{punchline}</p>
             </div>
-            <hr className="border-t border-gray-300 my-4" />
+           
             <div className="flex items-center mb-6 space-x-4 justify-center">
+            <hr className="border-t border-gray-300 my-4" />
               <Button className="bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500">
                 Free Consultation
                 <IoIosCalendar className="ml-2 h-5 w-5" />
