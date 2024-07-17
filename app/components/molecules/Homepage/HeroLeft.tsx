@@ -14,7 +14,7 @@ export default function HeroLeft({ heading, punchline, pills }: HeroLeftProps) {
     <div className="relative h-full px-4 pt-16 mx-auto lg:py-16 bg-gray-50 border">
       <div className="max-w-xl h-full mx-auto lg:flex">
         <div className="mb-16 h-full lg:mb-0">
-          <div className="bg-white border rounded-lg p-6 h-full flex flex-col">
+          <div className="bg-white border rounded-lg p-6 h-full">
             <div className="max-w-xl mb-6">
               <div className="flex items-start mb-4 h-full border-b border-gray-300 pb-4">
                 <div className="p-1 rounded-lg border-2 border-gray-500">
@@ -36,7 +36,6 @@ export default function HeroLeft({ heading, punchline, pills }: HeroLeftProps) {
               <hr className="border-t border-gray-300 my-4" />
               <p className="text-xl text-gray-600 mt-2 mb-4">{punchline}</p>
             </div>
-            <div className="flex-grow"></div>
             <hr className="border-t border-gray-300 my-4" />
             <div className="flex items-center mb-6 space-x-4 justify-center">
               <Button className="bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500">
