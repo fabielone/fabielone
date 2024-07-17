@@ -17,7 +17,20 @@ import ProjectCardList from '~/components/molecules/Homepage/Projects';
 //import { getPosts, PostMeta } from "../.server/posts"; // Import getPosts function and PostMeta type
 
 
-export const meta: MetaFunction = () => [{ title: "Fabiel Ramirez: Full Stack Web Developer, AI consulting and Coding Instructor" }];
+export const meta: MetaFunction = () => [{ title: "Fabiel Ramirez: Full Stack Web Developer, AI Consulting, and Coding Instructor" },
+  { name: "description", content: "Explore the portfolio of Fabiel Ramirez, a Full Stack Web Developer specializing in AI consulting and coding instruction. Discover projects, online classes, and insightful blog posts on the latest in technology and development." },
+  { name: "keywords", content: "Fabiel Ramirez, Full Stack Web Developer, AI Consulting, Coding Instructor, Online Classes, Web Development, JavaScript, React, Node.js, DynamoDB, AWS, Portfolio, Tech Blog, Projects" },
+  { name: "author", content: "Fabiel Ramirez" },
+  { name: "robots", content: "index, follow" },
+  { property: "og:title", content: "Fabiel Ramirez: Full Stack Web Developer, AI Consulting, and Coding Instructor" },
+  { property: "og:description", content: "Explore the portfolio of Fabiel Ramirez, a Full Stack Web Developer specializing in AI consulting and coding instruction. Discover projects, online classes, and insightful blog posts on the latest in technology and development." },
+  { property: "og:image", content: "URL_to_your_image" },
+  { property: "og:url", content: "https://www.fabiel.one" },
+  { property: "og:type", content: "website" },
+  { name: "twitter:card", content: "summary_large_image" },
+  { name: "twitter:title", content: "Fabiel Ramirez: Full Stack Web Developer, AI Consulting, and Coding Instructor" },
+  { name: "twitter:description", content: "Explore the portfolio of Fabiel Ramirez, a Full Stack Web Developer specializing in AI consulting and coding instruction. Discover projects, online classes, and insightful blog posts on the latest in technology and development." },
+  { name: "twitter:image", content: "URL_to_your_image" }];
 
 // export const loader: LoaderFunction = async () => {
 //   try {
