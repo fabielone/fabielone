@@ -3,13 +3,13 @@ import type {  MetaFunction } from "@remix-run/node"
 
 //import { Link} from "@remix-run/react";
 import ProjectCard from '~/components/molecules/Cards/ProjectCard';
-import Header from '~/components/molecules/Cards/ServiceCard';
 import BlogSection from '~/components/molecules/Homepage/BlogSection';
 //import ContactSection from '~/components/molecules/Homepage/Contact';
 //import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 import Hero from "~/components/molecules/Homepage/Hero";
 //import Methodology from '~/components/molecules/Homepage/Methodology';
 import ProjectCardList from '~/components/molecules/Homepage/Projects';
+import MyServices from "~/components/sections/MyServices";
 //import ServicesSection from "~/components/molecules/Homepage/Services";
 //import { useOptionalUser } from "~/utils";
 
@@ -50,12 +50,7 @@ export default function Index() {
   //   to: { x: 100 },
   // })
 
-  const items = [
-    { icon: '💻', text: 'Web Development' },
-    { icon: '📈', text: 'SEO Optimization' },
-    { icon: '🎨', text: 'UI/UX Design' },
-    { icon: '📊', text: 'Digital Marketing' },
-  ];
+
 
   // const steps = [
   //   {
@@ -123,44 +118,8 @@ export default function Index() {
     
    
     <Hero />
-    <Header
-      pill="web development"
-      title="Welcome to Our Services"
-      subtitle="Web Development and More"
-      description="We offer a variety of services to help your business succeed online. From web development to digital marketing, we have you covered."
-      buttonText="Get started"
-      buttonLink="/get-started"
-      learnMoreLink="/learn-more"
-      imageUrl="https://fabielone.s3.us-west-1.amazonaws.com/portfolio/webdev"
-      imagePosition='right'
-      items={items}
-    />
-    <Header
-      pill="online marketing"
-      title="Welcome to Our Services"
-      subtitle="Web Development and More"
-      description="We offer a variety of services to help your business succeed online. From web development to digital marketing, we have you covered."
-      buttonText="Get started"
-      buttonLink="/get-started"
-      learnMoreLink="/learn-more"
-      imageUrl="https://fabielone.s3.us-west-1.amazonaws.com/portfolio/onlinemarketing"
-      imagePosition='left'
-      items={items}
-    />
-
-<Header
-      pill="ai integration"
-      title="Welcome to Our Services"
-      subtitle="Web Development and More"
-      description="We offer a variety of services to help your business succeed online. From web development to digital marketing, we have you covered."
-      buttonText="Get started"
-      buttonLink="/get-started"
-      learnMoreLink="/learn-more"
-      imageUrl="https://fabielone.s3.us-west-1.amazonaws.com/portfolio/aisolutions"
-      imagePosition='right'
-      items={items}
-    />
-
+    
+<MyServices/>
  <ProjectCard imageUrl={'https://kitwind.io/assets/kometa/full-browser.png'} title={'pastries.com'} description={'A website to sell pastries'} buttonLink={'https://pastries.com'} categories={["React","Ecommerce"]}>
   
  </ProjectCard>
