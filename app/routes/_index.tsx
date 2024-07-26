@@ -2,7 +2,6 @@
 import type {  MetaFunction } from "@remix-run/node"
 
 //import { Link} from "@remix-run/react";
-import ProjectCard from '~/components/molecules/Cards/ProjectCard';
 import BlogSection from '~/components/molecules/Homepage/BlogSection';
 //import ContactSection from '~/components/molecules/Homepage/Contact';
 //import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
@@ -84,7 +83,7 @@ export default function Index() {
       id: 1,
       title: 'Project 1',
       description: 'Description of Project 1',
-      imageUrl: '/path/to/image1.jpg',
+      imageUrl: 'https://kitwind.io/assets/kometa/full-browser.png',
       buttonLink: '/project1',
       categories: ['Web Development', 'Design'],
     },
@@ -92,7 +91,7 @@ export default function Index() {
       id: 2,
       title: 'Project 2',
       description: 'Description of Project 2',
-      imageUrl: '/path/to/image2.jpg',
+      imageUrl: 'https://kitwind.io/assets/kometa/full-browser.png',
       buttonLink: '/project2',
       categories: ['Mobile App', 'UX/UI'],
     },
@@ -120,9 +119,7 @@ export default function Index() {
     <Hero />
     
 <MyServices/>
- <ProjectCard imageUrl={'https://kitwind.io/assets/kometa/full-browser.png'} title={'pastries.com'} description={'A website to sell pastries'} buttonLink={'https://pastries.com'} categories={["React","Ecommerce"]}>
   
- </ProjectCard>
 
  <ProjectCardList projects={projects} />
  <BlogSection blogs={blogData} />

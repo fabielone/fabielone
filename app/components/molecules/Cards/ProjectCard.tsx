@@ -13,7 +13,7 @@ const ProjectCard: React.FC<CardProps> = ({ imageUrl, title, description, button
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <a href="/">
-        <img className="rounded-t-lg object-cover w-full h-40" src={imageUrl} alt="" />
+        <img className="rounded-t-lg object-cover w-full" src={imageUrl} alt="" />
       </a>
       <div className="p-5">
         <div className="flex mb-2">
