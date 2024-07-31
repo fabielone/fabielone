@@ -2,7 +2,7 @@ import { FaMountain, FaChalkboardTeacher, FaPaintBrush, FaGamepad, FaExternalLin
 
 export default function HeroRight() {
   return (
-    <section className="py-16 min-h-screen flex items-center ">
+    <section className="pt-4 min-h-screen flex items-center ">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center h-full">
           <div className="bg-white border rounded-lg overflow-hidden flex flex-col h-full w-full max-w-xl">

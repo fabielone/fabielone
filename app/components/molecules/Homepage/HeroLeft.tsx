@@ -11,7 +11,7 @@ interface HeroLeftProps {
 
 export default function HeroLeft({ heading, punchline, pills }: HeroLeftProps) {
   return (
-    <div className="relative h-full px-4 pt-16 mx-auto lg:py-16">
+    <div className="relative h-full px-2 pt-4 mx-auto ">
       <div className="max-w-xl h-full mx-auto lg:flex">
         <div className="mb-16 h-full lg:mb-0">
           <div className="bg-white border rounded-lg p-6 h-full">
