@@ -1,6 +1,7 @@
 // import { useSpring, animated } from '@react-spring/web'
 import type {  MetaFunction } from "@remix-run/node"
 
+
 //import { Link} from "@remix-run/react";
 import BlogSection from '~/components/molecules/Homepage/BlogSection';
 //import ContactSection from '~/components/molecules/Homepage/Contact';
@@ -117,7 +118,7 @@ export default function Index() {
     
    
     <Hero />
-    
+  
 <MyServices/>
   
 

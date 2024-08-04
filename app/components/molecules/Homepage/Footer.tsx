@@ -14,24 +14,39 @@ const Footer: React.FC = () => {
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Services</h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="https://flowbite.com/" className="hover:underline">Flowbite</a>
+                <li className="mb-1">
+                  <a href="/services/webdevelopment" className="hover:underline">Web Development</a>
                 </li>
-                <li>
-                  <a href="https://tailwindcss.com/" className="hover:underline">Tailwind CSS</a>
+                <li className="mb-1">
+                  <a href="/services/onlinemarketing" className="hover:underline">Online Marketing</a>
+                </li>
+                <li className="mb-1">
+                  <a href="/services/aiconsulting" className="hover:underline">AI Consulting</a>
+                </li>
+                <li className="mb-1">
+                  <a href="/services/hosting" className="hover:underline">Hosting</a>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Blog</h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="https://github.com/themesberg/flowbite" className="hover:underline">Github</a>
+                <li className="mb-1">
+                  <a href="/blog/life" className="hover:underline">life</a>
                 </li>
-                <li>
-                  <a href="https://discord.gg/4eeurUVvTy" className="hover:underline">Discord</a>
+                <li className="mb-1">
+                  <a href="/blog/coding" className="hover:underline">coding</a>
+                </li>
+                <li className="mb-1">
+                  <a href="/blog/gaming" className="hover:underline">gaming</a>
+                </li>
+                <li className="mb-1">
+                  <a href="/blog/business" className="hover:underline">business</a>
+                </li>
+                <li className="mb-1">
+                  <a href="/blog/easycash" className="hover:underline">easycash</a>
                 </li>
               </ul>
             </div>
@@ -39,10 +54,10 @@ const Footer: React.FC = () => {
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="/" className="hover:underline">Privacy Policy</a>
+                  <a href="/privacy" className="hover:underline">Privacy Policy</a>
                 </li>
                 <li>
-                  <a href="/" className="hover:underline">Terms &amp; Conditions</a>
+                  <a href="/terms" className="hover:underline">Terms &amp; Conditions</a>
                 </li>
               </ul>
             </div>
