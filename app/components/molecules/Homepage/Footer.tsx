@@ -17,16 +17,16 @@ const Footer: React.FC = () => {
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Services</h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-1">
-                  <a href="/services/webdevelopment" className="hover:underline">Web Development</a>
+                  <a href="/services/webdevelopment/" className="hover:underline">Web Development</a>
                 </li>
                 <li className="mb-1">
-                  <a href="/services/onlinemarketing" className="hover:underline">Online Marketing</a>
+                  <a href="/services/onlinemarketing/" className="hover:underline">Online Marketing</a>
                 </li>
                 <li className="mb-1">
-                  <a href="/services/aiconsulting" className="hover:underline">AI Consulting</a>
+                  <a href="/services/aiconsulting/" className="hover:underline">AI Consulting</a>
                 </li>
                 <li className="mb-1">
-                  <a href="/services/hosting" className="hover:underline">Hosting</a>
+                  <a href="/services/hosting/" className="hover:underline">Hosting</a>
                 </li>
               </ul>
             </div>
@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
                   <a href="/blog/coding" className="hover:underline">coding</a>
                 </li>
                 <li className="mb-1">
-                  <a href="/blog/gaming" className="hover:underline">gaming</a>
+                  <a href="/blog/gaming/" className="hover:underline">gaming</a>
                 </li>
                 <li className="mb-1">
                   <a href="/blog/business" className="hover:underline">business</a>
