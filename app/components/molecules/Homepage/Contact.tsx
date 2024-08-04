@@ -1,15 +1,9 @@
 import { useSpring, animated } from '@react-spring/web';
-// import { useLocation } from '@remix-run/react';
-// import { useState } from 'react';
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
 
 
-import { User } from '~/models/user.server';
 
-const ContactSection = ({ user }: { user: User | undefined }) => {
-  // const location = useLocation();
-  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+const ContactSection = () => {
   const socialMediaIcons = useSpring({
     from: { transform: 'translateX(-100%)' },
     to: { transform: 'translateX(0%)' },
@@ -24,14 +18,9 @@ const ContactSection = ({ user }: { user: User | undefined }) => {
         </p>
         <div className="flex justify-between">
           <div className="w-1/2 pr-4">
-            {user ? (
-              <p className="text-gray-900 dark:text-white mb-4">You are logged in. Send a message directly.</p>
-            ) : (
-              <p className="text-gray-900 dark:text-white mb-4">
-                Log in to send a message or contact through social media:
-              </p>
-            )}
-            {!user ? <div className="flex space-x-4">
+          
+           
+              <div className="flex space-x-4">
                 <animated.div style={socialMediaIcons}>
                   <FaFacebook className="text-blue-600 w-6 h-6" />
                 </animated.div>
@@ -41,7 +30,8 @@ const ContactSection = ({ user }: { user: User | undefined }) => {
                 <animated.div style={socialMediaIcons}>
                   <FaLinkedin className="text-blue-700 w-6 h-6" />
                 </animated.div>
-              </div> : null}
+              </div>
+          
           </div>
           <div className="w-1/2 pl-4">
             <form action="#" className="space-y-8">
