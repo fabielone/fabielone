@@ -48,7 +48,7 @@ export default function App() {
       <body className="h-full">
         <NavBar user={user} />
         <Outlet />
-        <ContactSection user={user} />
+        <ContactSection  />
         <Footer />
         <ScrollRestoration />
         <Scripts />
