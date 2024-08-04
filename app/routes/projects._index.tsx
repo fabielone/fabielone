@@ -1,6 +1,6 @@
 // projects._index.tsx
+import { Link } from '@remix-run/react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const dummyProjects = [
   { id: 1, name: "Project Alpha", tags: ["web", "development"], description: "A web development project." },

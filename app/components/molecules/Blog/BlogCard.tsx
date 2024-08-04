@@ -24,10 +24,12 @@ const BlogCard: React.FC<BlogCardProps> = ({
   tags,
   link,
 }) => {
+  const formattedDate = new Date(date).toLocaleDateString('en-US', { timeZone: 'UTC' });
+
   return (
     <article className="flex max-w-xl flex-col items-start justify-between bg-white border border-gray-200 rounded-lg shadow-lg p-6">
       <div className="flex items-center gap-x-4 text-xs mb-4">
-        <time dateTime={date} className="text-gray-500">{new Date(date).toLocaleDateString()}</time>
+        <time dateTime={date} className="text-gray-500">{formattedDate}</time>
         <a href="/" className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
           {category}
         </a>
