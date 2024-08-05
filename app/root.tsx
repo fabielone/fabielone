@@ -17,7 +17,7 @@ import { ThemeModeScript } from "flowbite-react";
 
 import stylesheet from "~/tailwind.css";
 
-import ContactSection from "./components/molecules/Homepage/Contact";
+//import ContactSection from "./components/molecules/Homepage/Contact";
 import Footer from "./components/molecules/Homepage/Footer";
 import { NavBar } from "./components/molecules/Homepage/NavBar";
 import { authenticator } from "./services/auth.server";
@@ -48,7 +48,7 @@ export default function App() {
       <body className="h-full">
         <NavBar user={user} />
         <Outlet />
-        <ContactSection  />
+        {/* <ContactSection  /> */}
         <Footer />
         <ScrollRestoration />
         <Scripts />
