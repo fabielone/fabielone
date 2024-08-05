@@ -14,25 +14,25 @@ export default function HeroRight() {
                 <br /> I am continuously working with clients, hosting webinars, and teaching the new generation of coders.
                 <span className="block mt-4">
                 🌟 I enjoy the <span className="text-yellow-300 ">outdoors</span>
-                  <a href="https://www.fabiel.one/lifestyle-blog" className="inline-block ml-2">
+                  <a href="https://fabiel.one/lifestyle-blog" className="inline-block ml-2">
                     <FaExternalLinkAlt className="inline-block text-sm text-yellow-300" />
                   </a>,
                    <span className="text-yellow-300">teaching</span>
-                  <a href="https://www.fabiel.one/classes" className="inline-block ml-2">
+                  <a href="https://fabiel.one/classes" className="inline-block ml-2">
                     <FaExternalLinkAlt className="inline-block text-sm text-yellow-300" />
                   </a>, 
                    <span className="text-yellow-300">painting</span>
-                  <a href="https://www.fabiel.one/store" className="inline-block ml-2">
+                  <a href="https://fabiel.one/store" className="inline-block ml-2">
                     <FaExternalLinkAlt className="inline-block text-sm text-yellow-300" />
                   </a>, and
                   <FaGamepad className="inline-block mx-2 text-2xl text-yellow-300" /> <span className="text-yellow-300">gaming</span>
-                  <a href="https://www.fabiel.one/gaming" className="inline-block ml-2">
+                  <a href="https://fabiel.one/gaming" className="inline-block ml-2">
                     <FaExternalLinkAlt className="inline-block text-sm text-yellow-300" />
                   </a>.
                 </span>
               </p>
               <div className="mt-6">
-                <a href="https://www.fabiel.one/profile" className="inline-block px-6 py-2 bg-blue-700 text-white font-semibold rounded hover:bg-blue-800 transition">
+                <a href="https://fabiel.one/profile" className="inline-block px-6 py-2 bg-blue-700 text-white font-semibold rounded hover:bg-blue-800 transition">
                   View Profile
                 </a>
               </div>
