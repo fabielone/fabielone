@@ -3,8 +3,8 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
-
 import { getPostBySlug } from '../.server/posts';
+import MDXComponents from '../posts/MDXexample'; // Import the custom components
 
 // Define loader function
 export const loader = async () => {
@@ -33,7 +33,9 @@ const MD: React.FC = () => {
       <br></br>
       {frontmatter.description}
       {/* Render the parsed MDX content */}
-      <ReactMarkdown  remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+      <ReactMarkdown  
+        components={MDXComponents} //
+        remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
     </article>
   );
 };
