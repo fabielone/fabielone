@@ -7,7 +7,7 @@ import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa"; // Import icons
-import { SocialsProvider } from 'remix-auth-socials';
+
 
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
@@ -177,7 +177,7 @@ export default function LoginPage() {
           </div>
         </Form>
         <div className="mt-4 flex flex-col space-y-2">
-         <Form action={`/auth/${SocialsProvider.GOOGLE}`} method="post">
+         <Form action={'/auth/google'} method="post">
             <button
             className="flex items-center justify-center space-x-2 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:bg-red-400"
 
